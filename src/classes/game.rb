@@ -16,7 +16,6 @@ class Game
     puts board
 
     until game_is_over?
-
       input_position = gets.chomp
       @players[0].try_move(@board, input_position)
 
