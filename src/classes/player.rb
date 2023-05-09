@@ -1,4 +1,5 @@
 require 'pry'
+require_relative './move'
 
 class Player
   VALID_POSITIONS = %w[0 1 2 3 4 5 6 7 8]
@@ -18,15 +19,18 @@ class Player
   def initialize(type)
     @type = AVAILABLE_PLAYER_TYPES[type]
     @marker = AVAILABLE_PLAYER_MARKERS[type]
+    @moves = []
   end
 
   def play_human_move(board)
     puts "Enter a number between 0 and 8:"
     desired_position_input = gets.chomp
 
-    if valid_position_input?(desired_position_input) && board.valid_board_position?(desired_position_input)
-      validated_board_position = desired_position_input.to_i
-      board.state[validated_board_position] = marker
+    @moves << Move.new(desired_position_input, board)
+    last_move = @moves.last
+
+    if last_move.valid
+      board.state[last_move.validated_position] = marker
     else
       puts "Please, choose a valid position move between 0 and 8:"
       play_human_move(board)
