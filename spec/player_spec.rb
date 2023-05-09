@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe Player do
-  let(:available_player_markers) { described_class::AVAILABLE_PLAYER_MARKERS }
-  let(:available_player_types) { described_class::AVAILABLE_PLAYER_TYPES }
-
   describe '#new' do
     before do
       @player = Player.new(type)
@@ -30,6 +27,31 @@ describe Player do
         expect(@player).to be_an_instance_of(Player)
         expect(@player.type).to eq(expected_type)
         expect(@player.marker).to eq(expected_marker)
+      end
+    end
+  end
+
+  describe '.make_move' do
+    let(:board) { Board.new() }
+    let(:player) { Player.new('HUMAN') }
+
+    subject { player.make_move(board, input_position) }
+
+    context 'when the input_position is valid' do
+      let(:input_position) { '1' }
+
+      it 'creates a new valid Move instance for the player' do
+        expect { subject }.to change { player.moves.count }.by(1)
+        expect(player.last_valid_move).to be_an_instance_of(Move)
+      end
+    end
+
+    context 'when the input_position is invalid' do
+      let(:input_position) { ';' }
+
+      it 'creates a new invalid Move instance for the player' do
+        expect { subject }.to change { player.moves.count }
+        expect(player.last_valid_move).to be_nil
       end
     end
   end

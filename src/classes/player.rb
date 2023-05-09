@@ -14,26 +14,23 @@ class Player
     'COMPUTER' => 'X',
   }
 
-  attr_reader :type, :marker
+  attr_reader :type, :marker, :moves, :last_valid_move
 
   def initialize(type)
     @type = AVAILABLE_PLAYER_TYPES[type]
     @marker = AVAILABLE_PLAYER_MARKERS[type]
     @moves = []
+    @last_valid_move = nil
   end
 
-  def play_human_move(board)
-    puts "Enter a number between 0 and 8:"
-    desired_position_input = gets.chomp
+  def make_move(board, input_position)
+    desired_position_input = input_position
 
     @moves << Move.new(desired_position_input)
     last_move = @moves.last
 
     if last_move.valid && board.valid_position?(last_move.valid_position)
-      board.state[last_move.valid_position] = marker
-    else
-      puts "Please, choose a valid position move between 0 and 8:"
-      play_human_move(board)
+      @last_valid_move = last_move
     end
   end
 end
