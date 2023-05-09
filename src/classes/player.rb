@@ -26,20 +26,14 @@ class Player
     puts "Enter a number between 0 and 8:"
     desired_position_input = gets.chomp
 
-    @moves << Move.new(desired_position_input, board)
+    @moves << Move.new(desired_position_input)
     last_move = @moves.last
 
-    if last_move.valid
-      board.state[last_move.validated_position] = marker
+    if last_move.valid && board.valid_position?(last_move.valid_position)
+      board.state[last_move.valid_position] = marker
     else
       puts "Please, choose a valid position move between 0 and 8:"
       play_human_move(board)
     end
-  end
-
-  private
-
-  def valid_position_input?(position_input)
-    VALID_POSITIONS.include?(position_input)
   end
 end
