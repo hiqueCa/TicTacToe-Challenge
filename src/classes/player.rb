@@ -1,12 +1,12 @@
 class Player
   AVAILABLE_PLAYER_TYPES = {
-    'human' => 'H',
-    'computer' => 'C',
+    'HUMAN' => 'human',
+    'COMPUTER' => 'computer',
   }
 
   AVAILABLE_PLAYER_MARKERS = {
-    'human' => 'O',
-    'computer' => 'X',
+    'HUMAN' => 'O',
+    'COMPUTER' => 'X',
   }
 
   attr_reader :type, :marker
