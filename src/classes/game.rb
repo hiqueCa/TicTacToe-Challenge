@@ -1,5 +1,5 @@
 class Game
-  require_relative "./board.rb"
+  require_relative "./board"
 
   def initialize
     @board = Board.new
