@@ -1,6 +1,10 @@
+require_relative "./board"
+require_relative "./player"
+require 'pry'
+
 class Game
-  require_relative "./board"
-  require_relative "./player"
+
+  attr_reader :board
 
   def initialize
     @board = Board.new
@@ -8,13 +12,12 @@ class Game
   end
 
   def start_game
-    # start by printing the board
-    puts @board
-    # loop through until the game was won or tied
-    until @board.game_is_over || tie(@board.state)
-      @players[0].play_human_move(@board)
+    puts board
+
+    until has_a_winner? || is_a_tie?
+      @players[0].make_move(@board, input_position)
       eval_board if !@board.game_is_over && !tie(@board.state)
-      puts @board
+      puts board
     end
     puts 'Game over'
   end
@@ -65,7 +68,11 @@ class Game
     available_spaces[n].to_i
   end
 
-  def tie(b)
-    b.all? { |s| %w[X O].include?(s) }
+  def has_a_winner?
+    board.column_uniquelly_filled? || board.row_uniquelly_filled? || board.diagonal_uniquelly_filled?
+  end
+
+  def is_a_tie?
+    board.state.all? { |s| %w[X O].include?(s) }
   end
 end
