@@ -1,11 +1,10 @@
 class Game
   require_relative "./board"
+  require_relative "./player"
 
   def initialize
     @board = Board.new
-    @players = []
-    @com = 'X' # the computer's marker
-    @hum = 'O' # the user's marker
+    @players = [Player.new('HUMAN'), Player.new('COMPUTER')]
   end
 
   def start_game
@@ -26,7 +25,7 @@ class Game
     until spot
       spot = gets.chomp.to_i
       if @board.state[spot] != 'X' && @board.state[spot] != 'O'
-        @board.state[spot] = @hum
+        @board.state[spot] = @players[0].marker
       else
         spot = nil
       end
@@ -38,11 +37,11 @@ class Game
     until spot
       if @board.state[4] == '4'
         spot = 4
-        @board.state[spot] = @com
+        @board.state[spot] = @players[1].marker
       else
-        spot = get_best_move(@board, @com)
+        spot = get_best_move(@board, @players[1])
         if @board.state[spot] != 'X' && @board.state[spot] != 'O'
-          @board.state[spot] = @com
+          @board.state[spot] = @players[1].marker
         else
           spot = nil
         end
@@ -57,13 +56,13 @@ class Game
       available_spaces << s if s != 'X' && s != 'O'
     end
     available_spaces.each do |as|
-      board.state[as.to_i] = @com
+      board.state[as.to_i] = @players[0].marker
       if board.game_is_over
         best_move = as.to_i
         board.state[as.to_i] = as
         return best_move
       else
-        board.state[as.to_i] = @hum
+        board.state[as.to_i] = @players[0].marker
         if board.game_is_over
           best_move = as.to_i
           board.state[as.to_i] = as
