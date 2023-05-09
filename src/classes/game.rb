@@ -10,26 +10,13 @@ class Game
   def start_game
     # start by printing the board
     puts @board
-    puts 'Enter [0-8]:'
     # loop through until the game was won or tied
     until @board.game_is_over || tie(@board.state)
-      get_human_spot
+      @players[0].play_human_move(@board)
       eval_board if !@board.game_is_over && !tie(@board.state)
       puts @board
     end
     puts 'Game over'
-  end
-
-  def get_human_spot
-    spot = nil
-    until spot
-      spot = gets.chomp.to_i
-      if @board.state[spot] != 'X' && @board.state[spot] != 'O'
-        @board.state[spot] = @players[0].marker
-      else
-        spot = nil
-      end
-    end
   end
 
   def eval_board
