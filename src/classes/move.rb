@@ -12,7 +12,6 @@ class Move
   end
 
   private
-
   
   def validated_position
     @position.to_i

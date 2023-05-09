@@ -1,11 +1,9 @@
-require_relative '../src/classes/move'
-require_relative '../src/classes/board'
+require_relative './spec_helper'
 
 describe Move do
   describe '#new' do
     before do
-      @board = Board.new()
-      @move = Move.new(position, @board)
+      @move = Move.new(position)
     end
 
     context 'when the user input position is valid' do
