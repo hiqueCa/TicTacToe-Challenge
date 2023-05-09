@@ -3,6 +3,7 @@ class Game
 
   def initialize
     @board = Board.new
+    @players = []
     @com = 'X' # the computer's marker
     @hum = 'O' # the user's marker
   end
@@ -14,7 +15,7 @@ class Game
     # loop through until the game was won or tied
     until @board.game_is_over || tie(@board.state)
       get_human_spot
-      eval_board if @board.game_is_over && !tie(@board.state)
+      eval_board if !@board.game_is_over && !tie(@board.state)
       puts @board
     end
     puts 'Game over'
@@ -39,7 +40,7 @@ class Game
         spot = 4
         @board.state[spot] = @com
       else
-        spot = get_best_move(@board.state, @com)
+        spot = get_best_move(@board, @com)
         if @board.state[spot] != 'X' && @board.state[spot] != 'O'
           @board.state[spot] = @com
         else
@@ -52,23 +53,23 @@ class Game
   def get_best_move(board, _next_player, _depth = 0, _best_score = {})
     available_spaces = []
     best_move = nil
-    board.each do |s|
+    board.state.each do |s|
       available_spaces << s if s != 'X' && s != 'O'
     end
     available_spaces.each do |as|
-      board[as.to_i] = @com
-      if @board.game_is_over
+      board.state[as.to_i] = @com
+      if board.game_is_over
         best_move = as.to_i
-        board[as.to_i] = as
+        board.state[as.to_i] = as
         return best_move
       else
-        board[as.to_i] = @hum
-        if @board.game_is_over
+        board.state[as.to_i] = @hum
+        if board.game_is_over
           best_move = as.to_i
-          board[as.to_i] = as
+          board.state[as.to_i] = as
           return best_move
         else
-          board[as.to_i] = as
+          board.state[as.to_i] = as
         end
       end
     end
@@ -82,5 +83,3 @@ class Game
     b.all? { |s| %w[X O].include?(s) }
   end
 end
-
-Game.new.start_game
