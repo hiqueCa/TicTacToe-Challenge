@@ -31,11 +31,11 @@ describe Player do
     end
   end
 
-  describe '.make_move' do
+  describe '.try_move' do
     let(:board) { Board.new() }
     let(:player) { Player.new('HUMAN') }
 
-    subject { player.make_move(board, input_position) }
+    subject { player.try_move(board, input_position) }
 
     context 'when the input_position is valid' do
       let(:input_position) { '1' }
@@ -43,6 +43,7 @@ describe Player do
       it 'creates a new valid Move instance for the player' do
         expect { subject }.to change { player.moves.count }.by(1)
         expect(player.last_valid_move).to be_an_instance_of(Move)
+        expect(player.last_valid_move).to eq(player.moves.last)
       end
     end
 
@@ -52,6 +53,7 @@ describe Player do
       it 'creates a new invalid Move instance for the player' do
         expect { subject }.to change { player.moves.count }
         expect(player.last_valid_move).to be_nil
+        expect(player.last_valid_move).not_to eq(player.moves.last)
       end
     end
   end

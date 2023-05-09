@@ -13,10 +13,13 @@ class Game
 
   def start_game
     puts board
+    puts "Enter a number position between 0 and 8, please:"
 
-    until has_a_winner? || is_a_tie?
-      @players[0].make_move(@board, input_position)
-      eval_board if !@board.game_is_over && !tie(@board.state)
+    until game_is_over?
+      input_position = gets.chomp
+      @players[0].try_move(@board, input_position)
+
+      eval_board if !has_a_winner? && !is_a_tie?
       puts board
     end
     puts 'Game over'
@@ -47,13 +50,13 @@ class Game
     end
     available_spaces.each do |as|
       board.state[as.to_i] = @players[0].marker
-      if board.game_is_over
+      if has_a_winner?
         best_move = as.to_i
         board.state[as.to_i] = as
         return best_move
       else
         board.state[as.to_i] = @players[0].marker
-        if board.game_is_over
+        if has_a_winner?
           best_move = as.to_i
           board.state[as.to_i] = as
           return best_move
@@ -73,6 +76,10 @@ class Game
   end
 
   def is_a_tie?
-    board.state.all? { |s| %w[X O].include?(s) }
+    board.is_fully_filled?
+  end
+
+  def game_is_over?
+    (has_a_winner? || is_a_tie?) && @players[0].last_move_was_valid?
   end
 end

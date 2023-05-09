@@ -22,7 +22,7 @@ class Player
     @last_valid_move = nil
   end
 
-  def make_move(board, input_position)
+  def try_move(board, input_position)
     desired_position_input = input_position
 
     @moves << Move.new(desired_position_input)
@@ -31,5 +31,9 @@ class Player
     if last_move.valid && board.valid_position?(last_move.valid_position)
       @last_valid_move = last_move
     end
+  end
+
+  def last_move_was_valid?
+    last_valid_move && last_valid_move == moves.last
   end
 end
