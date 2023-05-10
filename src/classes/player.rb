@@ -34,6 +34,6 @@ class Player
   end
 
   def last_move_was_valid?
-    last_valid_move && last_valid_move == moves.last
+    !last_valid_move.nil? && last_valid_move == moves.last
   end
 end

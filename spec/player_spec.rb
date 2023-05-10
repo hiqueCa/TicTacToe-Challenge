@@ -5,7 +5,6 @@ describe Player do
     before do
       @player = Player.new(type)
     end
-
     context 'when the player is human' do
       let(:type) { 'HUMAN' }
       let(:expected_type) { 'human' }
@@ -54,6 +53,33 @@ describe Player do
         expect { subject }.to change { player.moves.count }
         expect(player.last_valid_move).to be_nil
         expect(player.last_valid_move).not_to eq(player.moves.last)
+      end
+    end
+  end
+
+  describe '.last_move_was_valid?' do
+    let(:player) { Player.new('HUMAN') }
+    let(:board) { Board.new() }
+
+    subject { player.last_move_was_valid? }
+
+    before do
+      player.try_move(board, input_position)
+    end
+
+    context 'when the input position is valid' do
+      let(:input_position) { '1' }
+
+      it 'returns true' do
+        expect(subject).to eq(true)
+      end
+    end
+
+    context 'when the input position is invalid' do
+      let(:input_position) { 'bleus' }
+
+      it 'returns false' do
+        expect(subject).to eq(false)
       end
     end
   end
