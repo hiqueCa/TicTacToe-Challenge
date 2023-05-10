@@ -76,6 +76,6 @@ class Board
   end
 
   def is_fully_filled?
-    state.all? { |state| %[X O].include?(state) }
+    state.all? { |position| %w[X O].include?(position) }
   end
 end

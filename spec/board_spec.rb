@@ -1,5 +1,8 @@
 require_relative './spec_helper'
 
+Pry.config.input = STDIN
+Pry.config.output = STDOUT
+
 describe Board do
   let(:board) { Board.new }
   let(:state) { board.state }
@@ -104,6 +107,26 @@ describe Board do
       it 'return true' do
         expect(subject).to be false
       end
+    end
+  end
+
+  describe 'is_fully_filled?' do
+    before do
+      board.state = board_state
+    end
+
+    subject { board.is_fully_filled? }
+
+    context 'when the board positions are all filled' do
+      let(:board_state) { %w[X O O X O X O X X] }
+
+      it { is_expected.to be(true) }
+    end
+
+    context 'when the board positions are not all filled' do
+      let(:board_state) { %w[0 O O X O X 6 X X] }
+
+      it { is_expected.to be(false) }
     end
   end
 end
