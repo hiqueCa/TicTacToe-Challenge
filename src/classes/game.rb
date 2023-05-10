@@ -1,5 +1,6 @@
 require_relative "./board"
-require_relative "./player_tree/player"
+require_relative "./player_tree/human"
+require_relative "./player_tree/computer"
 require 'pry'
 
 class Game
@@ -8,7 +9,7 @@ class Game
 
   def initialize
     @board = Board.new
-    @players = [Player.new('HUMAN'), Player.new('COMPUTER')]
+    @players = [Human.new, Computer.new]
   end
 
   def start
