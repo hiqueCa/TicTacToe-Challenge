@@ -45,7 +45,7 @@ class Game
         spot = 4
         @board.state[spot] = @players[1].marker
       else
-        spot = get_best_move(@board)
+        spot = @players[1].define_best_move(self, @players[0])
         if @board.state[spot] != 'X' && @board.state[spot] != 'O'
           @board.state[spot] = @players[1].marker
         else
@@ -53,29 +53,6 @@ class Game
         end
       end
     end
-  end
-
-  def get_best_move(board)
-    best_move = nil
-
-    available_spaces_for_current_try = board.state.map do |position|
-      position if !%w[X O].include?(position)
-    end.compact
-
-    available_spaces_for_current_try.each do |available_space|
-      board.state[available_space.to_i] = @players[0].marker
-      if has_a_winner?
-        best_move = available_space.to_i
-        board.state[available_space.to_i] = available_space
-
-        return best_move
-      else
-        board.state[available_space.to_i] = available_space
-      end
-    end
-
-    random_move_position = rand(0..available_spaces_for_current_try.count)
-    available_spaces_for_current_try[random_move_position].to_i
   end
 
   def has_a_winner?
