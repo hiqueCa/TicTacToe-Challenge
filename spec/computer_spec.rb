@@ -8,6 +8,8 @@ describe Computer do
       expect(computer).to be_an_instance_of(Computer)
       expect(computer.type).to eq('computer')
       expect(computer.marker).to eq('X')
+      expect(computer.moves).to match_array([])
+      expect(computer.last_valid_move).to be_nil
     end
 
     it 'creates a Computer instance which should inherit from Player superclass' do
