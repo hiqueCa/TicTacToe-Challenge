@@ -1,8 +1,5 @@
 require_relative './spec_helper'
 
-Pry.config.input = STDIN
-Pry.config.output = STDOUT
-
 describe Board do
   let(:board) { Board.new }
   let(:state) { board.state }
