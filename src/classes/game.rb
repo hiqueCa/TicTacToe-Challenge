@@ -15,7 +15,7 @@ class Game
   def start
     puts board
 
-    until game_is_over?
+    until is_over?
       puts "Enter a move position between 0 and 8:"
       input_position = gets.chomp
 
@@ -29,6 +29,7 @@ class Game
       end
 
       @board.state[input_position.to_i] = @players[0].marker
+
       eval_board
 
       puts board
@@ -48,39 +49,33 @@ class Game
         if @board.state[spot] != 'X' && @board.state[spot] != 'O'
           @board.state[spot] = @players[1].marker
         else
-          spot = nil
+          break
         end
       end
     end
   end
 
   def get_best_move(board)
-    available_spaces = []
     best_move = nil
-    board.state.each do |s|
-      available_spaces << s if s != 'X' && s != 'O'
-    end
-    available_spaces.each do |as|
-      board.state[as.to_i] = @players[0].marker
+
+    available_spaces_for_current_try = board.state.map do |position|
+      position if !%w[X O].include?(position)
+    end.compact
+
+    available_spaces_for_current_try.each do |available_space|
+      board.state[available_space.to_i] = @players[0].marker
       if has_a_winner?
-        best_move = as.to_i
-        board.state[as.to_i] = as
+        best_move = available_space.to_i
+        board.state[available_space.to_i] = available_space
+
         return best_move
       else
-        board.state[as.to_i] = @players[0].marker
-        if has_a_winner?
-          best_move = as.to_i
-          board.state[as.to_i] = as
-          return best_move
-        else
-          board.state[as.to_i] = as
-        end
+        board.state[available_space.to_i] = available_space
       end
     end
-    return best_move if best_move
 
-    n = rand(0..available_spaces.count)
-    available_spaces[n].to_i
+    random_move_position = rand(0..available_spaces_for_current_try.count)
+    available_spaces_for_current_try[random_move_position].to_i
   end
 
   def has_a_winner?
@@ -91,7 +86,7 @@ class Game
     board.is_fully_filled?
   end
 
-  def game_is_over?
+  def is_over?
     (has_a_winner? || is_a_tie?)
   end
 end
