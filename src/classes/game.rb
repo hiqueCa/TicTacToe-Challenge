@@ -11,7 +11,7 @@ class Game
     @players = [Player.new('HUMAN'), Player.new('COMPUTER')]
   end
 
-  def start_game
+  def start
     puts board
 
     until game_is_over?
