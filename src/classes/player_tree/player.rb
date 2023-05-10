@@ -11,9 +11,11 @@ class Player
     'COMPUTER' => 'X',
   }
 
-  attr_reader :moves, :last_valid_move
+  attr_reader :moves, :last_valid_move, :type, :marker
 
   def initialize
+    @type = nil
+    @marker = nil
     @moves = []
     @last_valid_move = nil
   end

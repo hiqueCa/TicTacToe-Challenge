@@ -10,6 +10,8 @@ describe Player do
       expect(@player).to be_an_instance_of(Player)
       expect(@player.moves).to match_array([])
       expect(@player.last_valid_move).to be_nil
+      expect(@player.marker).to be_nil
+      expect(@player.type).to be_nil
     end
   end
 
