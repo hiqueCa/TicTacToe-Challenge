@@ -12,13 +12,22 @@ class Game
   end
 
   def start_game
-    puts "Enter a number position between 0 and 8, please:"
     puts board
 
     until game_is_over?
+      puts "Enter a move position between 0 and 8:"
       input_position = gets.chomp
-      @players[0].try_move(@board, input_position)
 
+      @players[0].try_move(board, input_position)
+
+      until @players[0].last_move_was_valid?
+        puts "Please, enter a valid move position:"
+        input_position = gets.chomp
+
+        @players[0].try_move(board, input_position)
+      end
+
+      @board.state[input_position.to_i] = @players[0].marker
       eval_board
 
       puts board
@@ -82,6 +91,6 @@ class Game
   end
 
   def game_is_over?
-    (has_a_winner? || is_a_tie?) && @players[0].last_move_was_valid?
+    (has_a_winner? || is_a_tie?)
   end
 end
