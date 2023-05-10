@@ -44,7 +44,7 @@ class Game
         spot = 4
         @board.state[spot] = @players[1].marker
       else
-        spot = get_best_move(@board, @players[1])
+        spot = get_best_move(@board)
         if @board.state[spot] != 'X' && @board.state[spot] != 'O'
           @board.state[spot] = @players[1].marker
         else
@@ -54,7 +54,7 @@ class Game
     end
   end
 
-  def get_best_move(board, _next_player, _depth = 0, _best_score = {})
+  def get_best_move(board)
     available_spaces = []
     best_move = nil
     board.state.each do |s|
