@@ -1,8 +1,6 @@
-require_relative './move'
+require_relative '../move'
 
 class Player
-  VALID_POSITIONS = %w[0 1 2 3 4 5 6 7 8]
-
   AVAILABLE_PLAYER_TYPES = {
     'HUMAN' => 'human',
     'COMPUTER' => 'computer',
@@ -13,11 +11,9 @@ class Player
     'COMPUTER' => 'X',
   }
 
-  attr_reader :type, :marker, :moves, :last_valid_move
+  attr_reader :moves, :last_valid_move
 
-  def initialize(type)
-    @type = AVAILABLE_PLAYER_TYPES[type]
-    @marker = AVAILABLE_PLAYER_MARKERS[type]
+  def initialize
     @moves = []
     @last_valid_move = nil
   end

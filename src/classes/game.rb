@@ -1,5 +1,5 @@
 require_relative "./board"
-require_relative "./player"
+require_relative "./player_tree/player"
 require 'pry'
 
 class Game
