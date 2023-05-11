@@ -35,12 +35,11 @@ class Computer < Player
 
       if game.has_a_winner?
         best_move = available_spot.to_i
-        board.state[available_spot.to_i] = available_spot
 
         return best_move
-      else
-        board.state[available_spot.to_i] = available_spot
       end
+
+      board.state[available_spot.to_i] = available_spot
     end
 
     random_move_position = rand(0..available_spots_for_current_try.count)
