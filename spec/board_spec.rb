@@ -126,4 +126,63 @@ describe Board do
       it { is_expected.to be(false) }
     end
   end
+
+  describe 'is_central_dominance_spot_available?' do
+    before do
+      state[4] = central_dominance_spot_state
+    end
+
+    subject { board.is_central_dominance_spot_available? }
+
+    context 'when central dominance spot is available' do
+      let(:central_dominance_spot_state) { '4' }
+
+      it 'returns true' do
+        expect(subject).to be(true)
+      end
+    end
+
+    context 'when central dominance spot is not available' do
+      let(:central_dominance_spot_state) { 'X' }
+
+      it 'returns true' do
+        expect(subject).to be(false)
+      end
+    end
+  end
+
+  describe 'available_spots' do
+    before do
+      board.state = current_board_state
+    end
+
+    subject { board.available_spots }
+
+    context 'when all board spots are available' do
+      let(:current_board_state) { %w[0 1 2 3 4 5 6 7 8] }
+      let(:expected_available_spots) { %w[0 1 2 3 4 5 6 7 8] }
+
+      it 'returns true' do
+        expect(subject).to match_array(expected_available_spots)
+      end
+    end
+
+    context 'when only some board spots are available' do
+      let(:current_board_state) { %w[0 X 2 O 4 5 6 O 8] }
+      let(:expected_available_spots) { %w[0 2 4 5 6 8] }
+
+      it 'returns true' do
+        expect(subject).to match_array(expected_available_spots)
+      end
+    end
+
+    context 'when no board spots are available' do
+      let(:current_board_state) { %w[O X O X O O X O X] }
+      let(:expected_available_spots) { [] }
+
+      it 'returns true' do
+        expect(subject).to match_array(expected_available_spots)
+      end
+    end
+  end
 end

@@ -80,12 +80,12 @@ class Board
   end
 
   def is_central_dominance_spot_available?
-    state[4] == '4'
+    valid_position?('4')
   end
 
   def available_spots
     state.map do |position|
-      position if !%w[X O].include?(position)
+      position if !%[X O].include?(position)
     end.compact
   end
 end
