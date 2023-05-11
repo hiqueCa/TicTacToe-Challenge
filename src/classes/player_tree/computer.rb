@@ -8,7 +8,7 @@ class Computer < Player
     @marker = Player::AVAILABLE_PLAYER_MARKERS['COMPUTER']
   end
 
-  def eval_board(game, next_player)
+  def make_move(game, next_player)
     board = game.board
     spot = nil
 

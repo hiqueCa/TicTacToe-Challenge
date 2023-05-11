@@ -30,7 +30,7 @@ class Game
 
       @board.state[input_position.to_i] = @players[0].marker
 
-      @players[1].eval_board(self, @players[0])
+      @players[1].make_move(self, @players[0])
 
       puts board
     end
