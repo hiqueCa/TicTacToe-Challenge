@@ -5,7 +5,7 @@ require 'pry'
 
 class Game
 
-  attr_reader :board
+  attr_reader :board, :players
 
   def initialize
     @board = Board.new
@@ -30,29 +30,12 @@ class Game
 
       @board.state[input_position.to_i] = @players[0].marker
 
-      eval_board
+      @players[1].eval_board(self, @players[0])
 
       puts board
     end
 
     puts 'Game over'
-  end
-
-  def eval_board
-    spot = nil
-    until spot
-      if @board.state[4] == '4'
-        spot = 4
-        @board.state[spot] = @players[1].marker
-      else
-        spot = @players[1].define_best_move(self, @players[0])
-        if @board.state[spot] != 'X' && @board.state[spot] != 'O'
-          @board.state[spot] = @players[1].marker
-        else
-          break
-        end
-      end
-    end
   end
 
   def has_a_winner?

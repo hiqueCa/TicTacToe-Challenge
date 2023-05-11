@@ -8,26 +8,42 @@ class Computer < Player
     @marker = Player::AVAILABLE_PLAYER_MARKERS['COMPUTER']
   end
 
-  def define_best_move(game, next_player)
+  def eval_board(game, next_player)
+    board = game.board
+    spot = nil
+
+    until spot
+      if board.is_central_dominance_spot_available?
+        spot = 4
+        board.state[spot] = marker
+      else
+        spot = define_best_available_move(game, next_player)
+        board.state[spot] = marker
+      end
+    end
+  end
+
+  private
+
+  def define_best_available_move(game, next_player)
+    board = game.board
     best_move = nil
+    available_spots_for_current_try = board.available_spots
 
-    available_spaces_for_current_try = game.board.state.map do |position|
-      position if !%w[X O].include?(position)
-    end.compact
+    available_spots_for_current_try.each do |available_spot|
+      board.state[available_spot.to_i] = next_player.marker
 
-    available_spaces_for_current_try.each do |available_space|
-      game.board.state[available_space.to_i] = next_player.marker
       if game.has_a_winner?
-        best_move = available_space.to_i
-        game.board.state[available_space.to_i] = available_space
+        best_move = available_spot.to_i
+        board.state[available_spot.to_i] = available_spot
 
         return best_move
       else
-        game.board.state[available_space.to_i] = available_space
+        board.state[available_spot.to_i] = available_spot
       end
     end
 
-    random_move_position = rand(0..available_spaces_for_current_try.count)
-    available_spaces_for_current_try[random_move_position].to_i
+    random_move_position = rand(0..available_spots_for_current_try.count)
+    available_spots_for_current_try[random_move_position].to_i
   end
 end
