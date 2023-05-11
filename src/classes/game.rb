@@ -42,6 +42,8 @@ class Game
     board.column_uniquelly_filled? || board.row_uniquelly_filled? || board.diagonal_uniquelly_filled?
   end
 
+  private
+
   def is_a_tie?
     board.is_fully_filled?
   end
