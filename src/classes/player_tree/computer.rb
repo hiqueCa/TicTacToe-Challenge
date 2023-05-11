@@ -10,17 +10,14 @@ class Computer < Player
 
   def eval_board(game, next_player)
     board = game.board
-    spot = nil
 
-    until spot
-      if board.is_central_dominance_spot_available?
-        spot = 4
-        board.state[spot] = marker
-      else
-        spot = define_best_available_move(game, next_player)
-        board.state[spot] = marker
-      end
+    if board.is_central_dominance_spot_available?
+      input_position = '4'
+    else
+      input_position = define_best_available_move(game, next_player)
     end
+
+    try_move(board, input_position)
   end
 
   private
@@ -34,16 +31,15 @@ class Computer < Player
       board.state[available_spot.to_i] = next_player.marker
 
       if game.has_a_winner?
-        best_move = available_spot.to_i
-        board.state[available_spot.to_i] = available_spot
-
+        best_move = available_spot
+        
         return best_move
-      else
-        board.state[available_spot.to_i] = available_spot
       end
+
+      board.state[available_spot.to_i] = available_spot
     end
 
     random_move_position = rand(0..available_spots_for_current_try.count)
-    available_spots_for_current_try[random_move_position].to_i
+    available_spots_for_current_try[random_move_position]
   end
 end
