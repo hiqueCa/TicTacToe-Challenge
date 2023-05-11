@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :state
+  attr_accessor :state, :available_spots
 
   def initialize
     @state = %w[0 1 2 3 4 5 6 7 8]
@@ -77,5 +77,15 @@ class Board
 
   def is_fully_filled?
     state.all? { |position| %w[X O].include?(position) }
+  end
+
+  def is_central_dominance_spot_available?
+    state[4] == '4'
+  end
+
+  def available_spots
+    state.map do |position|
+      position if !%w[X O].include?(position)
+    end.compact
   end
 end
