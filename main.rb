@@ -1,16 +1,18 @@
 require_relative './src/classes/game'
 
+PLAY_AGAIN_MESSAGE = "\nDo you want to keep playing? (Y / N)"
+
 playing = true
 
 while playing
   Game.new.start
 
-  puts "Do you want to keep playing? (Y / N)"
+  puts PLAY_AGAIN_MESSAGE
 
   keep_playing = gets.chomp
 
   until (keep_playing == "Y" || keep_playing == "N")
-    puts "Do you wnat to keep playing? (Y / N)"
+    puts PLAY_AGAIN_MESSAGE
 
     keep_playing = gets.chomp
   end
