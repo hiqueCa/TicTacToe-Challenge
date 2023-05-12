@@ -1,8 +1,14 @@
 class Board
-  attr_accessor :state, :available_spots
+  attr_accessor :state, 
+                :first_uniquelly_filled_column, 
+                :first_uniquelly_filled_row, 
+                :first_uniquelly_filled_diagonal
 
   def initialize
     @state = %w[0 1 2 3 4 5 6 7 8]
+    @first_uniquelly_filled_column = []
+    @first_uniquelly_filled_row = []
+    @first_uniquelly_filled_diagonal = []
   end
 
   def to_s
@@ -24,6 +30,7 @@ class Board
       ]
 
       if row.uniq.length == 1
+        @first_uniquelly_filled_row = row
         return true
       else
         next
@@ -44,6 +51,7 @@ class Board
       ]
 
       if column.uniq.length == 1
+        @first_uniquelly_filled_column = column
         return true
       else
         next
@@ -68,7 +76,11 @@ class Board
       state[common_diagonals_index + 2],
     ]
 
-    if main_diagonal.uniq.length == 1 || secondary_diagonal.uniq.length == 1
+    if main_diagonal.uniq.length == 1
+      @first_uniquelly_filled_diagonal = main_diagonal
+      return true
+    elsif secondary_diagonal.uniq.length == 1
+      @first_uniquelly_filled_diagonal = secondary_diagonal
       return true
     end
 

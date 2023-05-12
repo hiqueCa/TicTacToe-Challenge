@@ -10,6 +10,9 @@ describe Board do
     it 'creates a new instance of Board with the correct attributes' do
       expect(board).to be_an_instance_of(Board)
       expect(board.state).to eq(initial_board_state)
+      expect(board.first_uniquelly_filled_column).to match_array([])
+      expect(board.first_uniquelly_filled_row).to match_array([])
+      expect(board.first_uniquelly_filled_diagonal).to match_array([])
     end
   end
 
@@ -27,14 +30,21 @@ describe Board do
     subject { board.row_uniquelly_filled? }
 
     context 'when a given board row is uniquelly filled' do
+      let(:row) { [state[0], state[1], state[2]] }
+
       before do
         state[0] = 'X'
         state[1] = 'X'
         state[2] = 'X'
       end
 
-      it 'return true' do
+      it 'returns true' do
         expect(subject).to be true
+      end
+
+      it 'sets the row as first_uniquelly_filled_row' do
+        subject
+        expect(board.first_uniquelly_filled_row).to match_array(row)
       end
     end
 
@@ -45,8 +55,13 @@ describe Board do
         state[2] = '2'
       end
 
-      it 'return true' do
+      it 'returns true' do
         expect(subject).to be false
+      end
+
+      it 'does not set the row as first_uniquelly_filled_row' do
+        subject
+        expect(board.first_uniquelly_filled_row).to match_array([])
       end
     end
   end
@@ -55,14 +70,21 @@ describe Board do
     subject { board.column_uniquelly_filled? }
 
     context 'when a given board column is uniquelly filled' do
+      let(:column) { [state[0], state[3], state[6]] }
+
       before do
         state[0] = 'X'
         state[3] = 'X'
         state[6] = 'X'
       end
 
-      it 'return true' do
+      it 'returns true' do
         expect(subject).to be true
+      end
+
+      it 'sets the column as first_uniquelly_filled_column' do
+        subject
+        expect(board.first_uniquelly_filled_column).to match_array(column)
       end
     end
 
@@ -73,8 +95,13 @@ describe Board do
         state[6] = '2'
       end
 
-      it 'return true' do
+      it 'returns true' do
         expect(subject).to be false
+      end
+
+      it 'does not set the column as first_uniquelly_filled_column' do
+        subject
+        expect(board.first_uniquelly_filled_column).to match_array([])
       end
     end
   end
@@ -82,27 +109,79 @@ describe Board do
   describe '.diagonal_uniquelly_filled?' do
     subject { board.diagonal_uniquelly_filled? }
 
-    context 'when a given board diagonal is uniquelly filled' do
+    context 'when the first board diagonal is uniquelly filled' do
+      let(:first_diagonal) { [state[0], state[4], state[8]] }
+
       before do
         state[0] = 'X'
         state[4] = 'X'
         state[8] = 'X'
       end
 
-      it 'return true' do
+      it 'returns true' do
         expect(subject).to be true
+      end
+
+      it 'set the first_diagonal as first_uniquelly_filled_diagonal' do
+        subject
+        expect(board.first_uniquelly_filled_diagonal).to match_array(first_diagonal)
       end
     end
 
-    context 'when a given board column is  not uniquelly filled' do
+    context 'when the first board diagonal is  not uniquelly filled' do
+      let(:first_diagonal) { [state[0], state[4], state[8]] }
+
       before do
         state[0] = 'X'
         state[4] = 'X'
         state[8] = '2'
       end
 
-      it 'return true' do
+      it 'returns false' do
         expect(subject).to be false
+      end
+
+      it 'does not set the first_diagonal as first_uniquelly_filled_diagonal' do
+        subject
+        expect(board.first_uniquelly_filled_diagonal).to match_array([])
+      end
+    end
+
+    context 'when the secondary board diagonal is uniquelly filled' do
+      let(:secondary_diagonal) { [state[2], state[4], state[6]] }
+
+      before do
+        state[2] = 'X'
+        state[4] = 'X'
+        state[6] = 'X'
+      end
+
+      it 'returns true' do
+        expect(subject).to be true
+      end
+
+      it 'set the secondary_diagonal as first_uniquelly_filled_diagonal' do
+        subject
+        expect(board.first_uniquelly_filled_diagonal).to match_array(secondary_diagonal)
+      end
+    end
+
+    context 'when the secondary board diagonal is not uniquelly filled' do
+      let(:secondary_diagonal) { [state[2], state[4], state[6]] }
+
+      before do
+        state[2] = 'X'
+        state[4] = 'X'
+        state[6] = 'O'
+      end
+
+      it 'returns false' do
+        expect(subject).to be false
+      end
+
+      it 'does not set the secondary_diagonal as first_uniquelly_filled_diagonal' do
+        subject
+        expect(board.first_uniquelly_filled_diagonal).to match_array([])
       end
     end
   end
