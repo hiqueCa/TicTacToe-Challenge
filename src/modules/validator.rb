@@ -5,11 +5,13 @@ module Validator
   VALID_MARKERS = %W[X O]
 
   def validate?(**kwargs)
-    input_values = kwargs[:values].upcase
+    return unless kwargs[:values]
+
+    input_values = kwargs[:values]
     comparison_values = kwargs[:compared_to]
     validation_method = kwargs[:by]
 
-    return true if comparison_values.send(validation_method, input_values)
+    return true if comparison_values.send(validation_method, input_values.upcase)
 
     false
   end
