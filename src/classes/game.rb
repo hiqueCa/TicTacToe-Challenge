@@ -31,6 +31,7 @@ class Game
       @board.state[@players[0].last_valid_move.valid_position] = @players[0].marker
 
       @players[1].make_move(self, @players[0])
+      @board.state[@players[1].last_valid_move.valid_position] = @players[1].marker
 
       puts board
     end
