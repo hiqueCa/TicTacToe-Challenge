@@ -5,14 +5,16 @@ require 'pry'
 
 class Game
 
-  attr_reader :board, :players
+  attr_reader :board, :player_one, :player_two
 
   def initialize
     @board = Board.new
     @players = [Human.new("X"), Computer.new("O")]
+    @player_one = @players[0]
+    @player_two = @players[1]
     @markers_to_players_mapper = {
-      @players[0].marker.to_s => @players[0],
-      @players[1].marker.to_s => @players[1],
+      @player_one.marker.to_s => @player_one,
+      @player_two.marker.to_s => @player_two,
     }
   end
 
@@ -23,19 +25,19 @@ class Game
       puts "Enter a move position between 0 and 8:"
       input_position = gets.chomp
 
-      @players[0].try_move(board, input_position)
+      @player_one.try_move(board, input_position)
 
-      until @players[0].last_move_was_valid?
+      until @player_one.last_move_was_valid?
         puts "Please, enter a valid move position:"
         input_position = gets.chomp
 
-        @players[0].try_move(board, input_position)
+        @player_one.try_move(board, input_position)
       end
 
-      @board.state[@players[0].last_valid_move.valid_position] = @players[0].marker
+      @board.state[@player_one.last_valid_move.valid_position] = @player_one.marker
 
-      @players[1].make_move(self, @players[0])
-      @board.state[@players[1].last_valid_move.valid_position] = @players[1].marker
+      @player_two.make_move(self, @player_one)
+      @board.state[@player_two.last_valid_move.valid_position] = @player_two.marker
 
       puts board
     end

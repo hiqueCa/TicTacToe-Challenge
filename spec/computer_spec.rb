@@ -21,14 +21,14 @@ describe Computer do
   describe '.make_move' do
     let(:game) { Game.new() }
     let(:board) { game.board }
-    let(:next_player) { game.players[0] }
-    let(:computer) { game.players[1] }
+    let(:player_one) { game.player_one }
+    let(:computer) { game.player_two }
 
     before do
       board.state = board_state
     end
 
-    subject { computer.make_move(game, next_player) }
+    subject { computer.make_move(game, player_one) }
 
     context 'when central dominance spot is available on board' do
       let(:board_state) { %[0 X 2 O 4 5 6 X 8] }
