@@ -1,6 +1,4 @@
 require 'simplecov'
-require 'pry'
-
 SimpleCov.start
 
 require_relative '../src/classes/player_tree/player'

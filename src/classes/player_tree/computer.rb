@@ -8,7 +8,7 @@ class Computer < Player
     @marker = Player::AVAILABLE_PLAYER_MARKERS['COMPUTER']
   end
 
-  def eval_board(game, next_player)
+  def make_move(game, next_player)
     board = game.board
 
     if board.is_central_dominance_spot_available?
@@ -31,8 +31,7 @@ class Computer < Player
       board.state[available_spot.to_i] = next_player.marker
 
       if game.has_a_winner?
-        best_move = available_spot
-        
+        best_move = available_spot.to_i
         return best_move
       end
 

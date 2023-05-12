@@ -30,7 +30,7 @@ class Game
 
       @board.state[@players[0].last_valid_move.position.to_i] = @players[0].marker
 
-      @players[1].eval_board(self, @players[0])
+      @players[1].make_move(self, @players[0])
 
       @board.state[@players[1].last_valid_move.position.to_i] = @players[1].marker
 
