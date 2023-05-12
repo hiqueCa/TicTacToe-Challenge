@@ -1,14 +1,15 @@
 class Board
-  attr_accessor :state, 
-                :first_uniquelly_filled_column, 
-                :first_uniquelly_filled_row, 
-                :first_uniquelly_filled_diagonal
+  attr_accessor :state
+  
+  attr_reader :first_uniquelly_filled_column_marker,
+              :first_uniquelly_filled_row_marker,
+              :first_uniquelly_filled_diagonal_marker
 
   def initialize
     @state = %w[0 1 2 3 4 5 6 7 8]
-    @first_uniquelly_filled_column = []
-    @first_uniquelly_filled_row = []
-    @first_uniquelly_filled_diagonal = []
+    @first_uniquelly_filled_column_marker = nil
+    @first_uniquelly_filled_row_marker = nil
+    @first_uniquelly_filled_diagonal_marker = nil
   end
 
   def to_s
@@ -29,8 +30,10 @@ class Board
         state[initial_row_index + 2],
       ]
 
-      if row.uniq.length == 1
-        @first_uniquelly_filled_row = row
+      row_uniq_markers = row.uniq
+
+      if row_uniq_markers.length == 1
+        @first_uniquelly_filled_row_marker = row_uniq_markers[0]
         return true
       else
         next
@@ -50,8 +53,10 @@ class Board
         state[initial_column_index + 6],
       ]
 
-      if column.uniq.length == 1
-        @first_uniquelly_filled_column = column
+      column_uniq_markers = column.uniq
+
+      if column_uniq_markers.length == 1
+        @first_uniquelly_filled_column_marker = column_uniq_markers[0]
         return true
       else
         next
@@ -76,11 +81,14 @@ class Board
       state[common_diagonals_index + 2],
     ]
 
+    main_diagonal_uniq_markers = main_diagonal.uniq
+    secondary_diagonal_uniq_markers = secondary_diagonal.uniq
+
     if main_diagonal.uniq.length == 1
-      @first_uniquelly_filled_diagonal = main_diagonal
+      @first_uniquelly_filled_diagonal_marker = main_diagonal_uniq_markers[0]
       return true
     elsif secondary_diagonal.uniq.length == 1
-      @first_uniquelly_filled_diagonal = secondary_diagonal
+      @first_uniquelly_filled_diagonal_marker = secondary_diagonal_uniq_markers[0]
       return true
     end
 
