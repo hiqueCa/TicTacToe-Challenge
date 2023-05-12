@@ -7,16 +7,10 @@ class Game
 
   attr_reader :board, :player_one, :player_two
 
-  GAME_TYPE_TO_PLAYERS_MAPPER = {
-    'HUMAN_HUMAN' => [Human.new('X'), Human.new('O')],
-    'HUMAN_CPU' => [Human.new('X'), Computer.new('O')],
-    'CPU_CPU' => [Computer.new('X'), Computer.new('O')],
-  }
-
   def initialize(game_type)
     @board = Board.new
     @game_type = game_type.upcase
-    @players = GAME_TYPE_TO_PLAYERS_MAPPER[@game_type]
+    @players = define_players
     @player_one = @players[0]
     @player_two = @players[1]
     @markers_to_players_mapper = {
@@ -138,6 +132,17 @@ class Game
       @player_two.make_move(self, @player_one)
       @board.state[@player_two.last_valid_move.valid_position] = @player_two.marker
       puts board
+    end
+  end
+
+  def define_players
+    case @game_type
+    when "HUMAN_HUMAN"
+      [Human.new('X'), Human.new('O')]
+    when "HUMAN_CPU"
+      [Human.new('X'), Computer.new('O')]
+    when "CPU_CPU"
+      [Computer.new('X'), Computer.new('X')]
     end
   end
 end
