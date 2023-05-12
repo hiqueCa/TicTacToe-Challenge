@@ -19,7 +19,8 @@ describe Computer do
   end
 
   describe '.make_move' do
-    let(:game) { Game.new() }
+    let(:game_type) { 'CPU_CPU' }
+    let(:game) { Game.new(game_type) }
     let(:board) { game.board }
     let(:player_one) { game.player_one }
     let(:computer) { game.player_two }

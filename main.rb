@@ -5,7 +5,7 @@ PLAY_AGAIN_MESSAGE = "\nDo you want to play again? (Y / N)"
 playing = true
 
 while playing
-  Game.new.start
+  Game.new('CPU_CPU').start
 
   puts PLAY_AGAIN_MESSAGE
 
