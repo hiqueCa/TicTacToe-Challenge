@@ -3,6 +3,14 @@ require_relative 'spec_helper'
 describe Game do
   let(:game) { Game.new }
 
+  describe '#new' do
+    it 'instatiates a new game object with the correct attributes' do
+      expect(game.board).to be_an_instance_of(Board)
+      expect(game.player_one).to be_an_instance_of(Human)
+      expect(game.player_two).to be_an_instance_of(Computer)
+    end
+  end
+
   describe '.has_a_winner?' do
     subject { game.has_a_winner? }
 
