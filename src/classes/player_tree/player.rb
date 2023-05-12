@@ -6,16 +6,11 @@ class Player
     'COMPUTER' => 'computer',
   }
 
-  AVAILABLE_PLAYER_MARKERS = {
-    'HUMAN' => 'O',
-    'COMPUTER' => 'X',
-  }
-
   attr_reader :move_trials, :last_valid_move, :type, :marker
 
-  def initialize
+  def initialize(marker)
     @type = nil
-    @marker = nil
+    @marker = marker
     @move_trials = []
     @last_valid_move = nil
   end
