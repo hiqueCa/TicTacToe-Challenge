@@ -12,12 +12,12 @@ class Computer < Player
     board = game.board
 
     if board.is_central_dominance_spot_available?
-      spot = 4
-      board.state[spot] = marker
+      input_position = '4'
     else
-      spot = define_best_available_move(game, next_player)
-      board.state[spot] = marker
+      input_position = define_best_available_move(game, next_player)
     end
+
+    try_move(board, input_position)
   end
 
   private
@@ -27,13 +27,13 @@ class Computer < Player
     available_spots_for_current_try = board.available_spots
     random_move_position = rand(0..available_spots_for_current_try.count)
 
-    best_move = available_spots_for_current_try[random_move_position].to_i
+    best_move = available_spots_for_current_try[random_move_position]
 
     available_spots_for_current_try.each do |available_spot|
       board.state[available_spot.to_i] = next_player.marker
 
       if game.has_a_winner?
-        best_move = available_spot.to_i
+        best_move = available_spot
       end
 
       board.state[available_spot.to_i] = available_spot
