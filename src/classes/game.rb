@@ -15,8 +15,8 @@ class Game
 
   def initialize(game_type)
     @board = Board.new
-    @game_type = game_type
-    @players = GAME_TYPE_TO_PLAYERS_MAPPER[game_type]
+    @game_type = game_type.upcase
+    @players = GAME_TYPE_TO_PLAYERS_MAPPER[@game_type]
     @player_one = @players[0]
     @player_two = @players[1]
     @markers_to_players_mapper = {
