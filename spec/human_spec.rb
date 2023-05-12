@@ -8,7 +8,7 @@ describe Human do
       expect(human).to be_an_instance_of(Human)
       expect(human.type).to eq('human')
       expect(human.marker).to eq('O')
-      expect(human.moves).to match_array([])
+      expect(human.move_trials).to match_array([])
       expect(human.last_valid_move).to be_nil
     end
 

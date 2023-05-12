@@ -5,9 +5,9 @@ class Move
 
   def initialize(position, board)
     @position = position
+    @board = board
     @valid = valid? ? true : false
     @valid_position = valid? ? validated_position : nil
-    @board = board
   end
 
   private
@@ -17,6 +17,6 @@ class Move
   end
 
   def valid?
-    VALID_POSITIONS.include?(@position)
+    VALID_POSITIONS.include?(@position) && @board.valid_position?(position)
   end
 end
