@@ -10,16 +10,13 @@ class Computer < Player
 
   def make_move(game, next_player)
     board = game.board
-    spot = nil
 
-    until spot
-      if board.is_central_dominance_spot_available?
-        spot = 4
-        board.state[spot] = marker
-      else
-        spot = define_best_available_move(game, next_player)
-        board.state[spot] = marker
-      end
+    if board.is_central_dominance_spot_available?
+      spot = 4
+      board.state[spot] = marker
+    else
+      spot = define_best_available_move(game, next_player)
+      board.state[spot] = marker
     end
   end
 
@@ -27,22 +24,21 @@ class Computer < Player
 
   def define_best_available_move(game, next_player)
     board = game.board
-    best_move = nil
     available_spots_for_current_try = board.available_spots
+    random_move_position = rand(0..available_spots_for_current_try.count)
+
+    best_move = available_spots_for_current_try[random_move_position].to_i
 
     available_spots_for_current_try.each do |available_spot|
       board.state[available_spot.to_i] = next_player.marker
 
       if game.has_a_winner?
         best_move = available_spot.to_i
-
-        return best_move
       end
 
       board.state[available_spot.to_i] = available_spot
     end
 
-    random_move_position = rand(0..available_spots_for_current_try.count)
-    available_spots_for_current_try[random_move_position].to_i
+    best_move
   end
 end
