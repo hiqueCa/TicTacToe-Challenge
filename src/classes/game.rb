@@ -142,7 +142,7 @@ class Game
     when "HUMAN_CPU"
       [Human.new('X'), Computer.new('O')]
     when "CPU_CPU"
-      [Computer.new('X'), Computer.new('X')]
+      [Computer.new('X'), Computer.new('O')]
     end
   end
 end
