@@ -23,11 +23,11 @@ class Player
   def try_move(board, input_position)
     desired_position_input = input_position
 
-    @moves << Move.new(desired_position_input)
-    last_move = @moves.last
+    move =  Move.new(desired_position_input, board)
 
-    if last_move.valid && board.valid_position?(last_move.valid_position)
-      @last_valid_move = last_move
+    if move.valid
+      @moves << move
+      @last_valid_move = @moves.last
     end
   end
 

@@ -3,10 +3,11 @@ class Move
 
   attr_reader :position, :valid, :valid_position
 
-  def initialize(position)
+  def initialize(position, board)
     @position = position
     @valid = valid? ? true : false
     @valid_position = valid? ? validated_position : nil
+    @board = board
   end
 
   private

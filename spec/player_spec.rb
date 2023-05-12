@@ -34,10 +34,9 @@ describe Player do
     context 'when the input_position is invalid' do
       let(:input_position) { ';' }
 
-      it 'creates a new invalid Move instance for the player' do
-        expect { subject }.to change { player.moves.count }
+      it 'does not create a new invalid Move instance for the player' do
+        expect { subject }.not_to change { player.moves.count }
         expect(player.last_valid_move).to be_nil
-        expect(player.last_valid_move).not_to eq(player.moves.last)
       end
     end
   end
