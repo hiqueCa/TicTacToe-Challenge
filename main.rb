@@ -1,6 +1,6 @@
 require_relative './src/classes/game'
 
-PLAY_AGAIN_MESSAGE = "\nDo you want to keep playing? (Y / N)"
+PLAY_AGAIN_MESSAGE = "\nDo you want to play again? (Y / N)"
 
 playing = true
 
