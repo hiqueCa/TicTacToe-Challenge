@@ -1,24 +1,21 @@
 require 'spec_helper'
 
 describe Player do
-  describe '#new' do
-    before do
-      @player = Player.new
-    end
+  let(:marker) { 'X' }
+  let(:board) { Board.new }
+  let(:player) { Player.new(marker) }
 
+  describe '#new' do
     it 'initializes the correct type of Player object with the correct instance variables' do
-      expect(@player).to be_an_instance_of(Player)
-      expect(@player.move_trials).to match_array([])
-      expect(@player.last_valid_move).to be_nil
-      expect(@player.marker).to be_nil
-      expect(@player.type).to be_nil
+      expect(player).to be_an_instance_of(Player)
+      expect(player.move_trials).to match_array([])
+      expect(player.last_valid_move).to be_nil
+      expect(player.marker).to eq(marker)
+      expect(player.type).to be_nil
     end
   end
 
   describe '.try_move' do
-    let(:board) { Board.new }
-    let(:player) { Player.new }
-
     subject { player.try_move(board, input_position) }
 
     context 'when the input_position is valid' do
@@ -53,9 +50,6 @@ describe Player do
   end
 
   describe '.last_move_was_valid?' do
-    let(:player) { Player.new }
-    let(:board) { Board.new }
-
     subject { player.last_move_was_valid? }
 
     before do

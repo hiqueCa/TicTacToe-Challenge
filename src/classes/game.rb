@@ -9,10 +9,10 @@ class Game
 
   def initialize
     @board = Board.new
-    @players = [Human.new, Computer.new]
+    @players = [Human.new("X"), Computer.new("O")]
     @markers_to_players_mapper = {
-      "O" => @players[0],
-      "X" => @players[1],
+      @players[0].marker.to_s => @players[0],
+      @players[1].marker.to_s => @players[1],
     }
   end
 

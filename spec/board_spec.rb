@@ -10,9 +10,9 @@ describe Board do
     it 'creates a new instance of Board with the correct attributes' do
       expect(board).to be_an_instance_of(Board)
       expect(board.state).to eq(initial_board_state)
-      expect(board.first_uniquelly_filled_column).to match_array([])
-      expect(board.first_uniquelly_filled_row).to match_array([])
-      expect(board.first_uniquelly_filled_diagonal).to match_array([])
+      expect(board.first_uniquelly_filled_column_marker).to be_nil
+      expect(board.first_uniquelly_filled_row_marker).to be_nil
+      expect(board.first_uniquelly_filled_diagonal_marker).to be_nil
     end
   end
 
@@ -30,7 +30,7 @@ describe Board do
     subject { board.row_uniquelly_filled? }
 
     context 'when a given board row is uniquelly filled' do
-      let(:row) { [state[0], state[1], state[2]] }
+      let(:marker) { 'X' }
 
       before do
         state[0] = 'X'
@@ -44,7 +44,7 @@ describe Board do
 
       it 'sets the row as first_uniquelly_filled_row' do
         subject
-        expect(board.first_uniquelly_filled_row).to match_array(row)
+        expect(board.first_uniquelly_filled_row_marker).to eq(marker)
       end
     end
 
@@ -61,7 +61,7 @@ describe Board do
 
       it 'does not set the row as first_uniquelly_filled_row' do
         subject
-        expect(board.first_uniquelly_filled_row).to match_array([])
+        expect(board.first_uniquelly_filled_row_marker).to be_nil
       end
     end
   end
@@ -70,7 +70,7 @@ describe Board do
     subject { board.column_uniquelly_filled? }
 
     context 'when a given board column is uniquelly filled' do
-      let(:column) { [state[0], state[3], state[6]] }
+      let(:marker) { 'X' }
 
       before do
         state[0] = 'X'
@@ -84,11 +84,11 @@ describe Board do
 
       it 'sets the column as first_uniquelly_filled_column' do
         subject
-        expect(board.first_uniquelly_filled_column).to match_array(column)
+        expect(board.first_uniquelly_filled_column_marker).to eq(marker)
       end
     end
 
-    context 'when a given board column is  not uniquelly filled' do
+    context 'when a given board column is not uniquelly filled' do
       before do
         state[0] = 'X'
         state[3] = 'X'
@@ -101,7 +101,7 @@ describe Board do
 
       it 'does not set the column as first_uniquelly_filled_column' do
         subject
-        expect(board.first_uniquelly_filled_column).to match_array([])
+        expect(board.first_uniquelly_filled_column_marker).to be_nil
       end
     end
   end
@@ -110,7 +110,7 @@ describe Board do
     subject { board.diagonal_uniquelly_filled? }
 
     context 'when the first board diagonal is uniquelly filled' do
-      let(:first_diagonal) { [state[0], state[4], state[8]] }
+      let(:marker) { 'X' }
 
       before do
         state[0] = 'X'
@@ -124,7 +124,7 @@ describe Board do
 
       it 'set the first_diagonal as first_uniquelly_filled_diagonal' do
         subject
-        expect(board.first_uniquelly_filled_diagonal).to match_array(first_diagonal)
+        expect(board.first_uniquelly_filled_diagonal_marker).to eq(marker)
       end
     end
 
@@ -143,12 +143,12 @@ describe Board do
 
       it 'does not set the first_diagonal as first_uniquelly_filled_diagonal' do
         subject
-        expect(board.first_uniquelly_filled_diagonal).to match_array([])
+        expect(board.first_uniquelly_filled_diagonal_marker).to be_nil
       end
     end
 
     context 'when the secondary board diagonal is uniquelly filled' do
-      let(:secondary_diagonal) { [state[2], state[4], state[6]] }
+      let(:marker) { 'X' }
 
       before do
         state[2] = 'X'
@@ -162,7 +162,7 @@ describe Board do
 
       it 'set the secondary_diagonal as first_uniquelly_filled_diagonal' do
         subject
-        expect(board.first_uniquelly_filled_diagonal).to match_array(secondary_diagonal)
+        expect(board.first_uniquelly_filled_diagonal_marker).to eq(marker)
       end
     end
 
@@ -181,7 +181,7 @@ describe Board do
 
       it 'does not set the secondary_diagonal as first_uniquelly_filled_diagonal' do
         subject
-        expect(board.first_uniquelly_filled_diagonal).to match_array([])
+        expect(board.first_uniquelly_filled_diagonal_marker).to be_nil
       end
     end
   end

@@ -1,13 +1,14 @@
 require_relative 'spec_helper'
 
 describe Human do
-  describe '#new' do
-    let(:human) { Human.new }
+  let(:marker) { 'X' }
+  let(:human) { Human.new(marker) }
 
+  describe '#new' do
     it 'creates an instance of Human with the correct attributes' do
       expect(human).to be_an_instance_of(Human)
       expect(human.type).to eq('human')
-      expect(human.marker).to eq('O')
+      expect(human.marker).to eq(marker)
       expect(human.move_trials).to match_array([])
       expect(human.last_valid_move).to be_nil
     end
