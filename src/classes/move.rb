@@ -1,6 +1,7 @@
-class Move
-  VALID_POSITIONS = %w[0 1 2 3 4 5 6 7 8]
+require_relative '../modules/input_validator'
+include InputValidator
 
+class Move  
   attr_reader :position, :valid, :valid_position
 
   def initialize(position, board)
@@ -17,6 +18,10 @@ class Move
   end
 
   def valid?
-    VALID_POSITIONS.include?(@position) && @board.valid_position?(position)
+    validate?(
+      values: position,
+      compared_to: InputValidator::VALID_POSITIONS,
+      by: :include?,
+    ) && @board.valid_position?(@position)
   end
 end
