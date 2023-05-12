@@ -28,14 +28,14 @@ class Game
         @players[0].try_move(board, input_position)
       end
 
-      @board.state[input_position.to_i] = @players[0].marker
+      @board.state[@players[0].last_valid_move.valid_position] = @players[0].marker
 
       @players[1].make_move(self, @players[0])
 
       puts board
     end
 
-    puts 'Game over'
+    print_end_game_message
   end
 
   def has_a_winner?
@@ -43,6 +43,14 @@ class Game
   end
 
   private
+
+  def print_end_game_message
+    if (has_a_winner?)
+      puts "bleus has won!"
+    elsif (is_a_tie?)
+      puts "It is a tie!"
+    end
+  end
 
   def is_a_tie?
     board.is_fully_filled?
