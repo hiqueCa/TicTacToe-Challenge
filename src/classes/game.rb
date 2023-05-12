@@ -10,6 +10,10 @@ class Game
   def initialize
     @board = Board.new
     @players = [Human.new, Computer.new]
+    @markers_to_players_mapper = {
+      "O" => @players[0],
+      "X" => @players[1],
+    }
   end
 
   def start
@@ -45,9 +49,17 @@ class Game
 
   private
 
+  def winner
+    return @markers_to_players_mapper[board.first_uniquelly_filled_column_marker] if board.column_uniquelly_filled?
+    return @markers_to_players_mapper[board.first_uniquelly_filled_row_marker] if board.row_uniquelly_filled?
+    return @markers_to_players_mapper[board.first_uniquelly_filled_diagonal_marker] if board.diagonal_uniquelly_filled?
+  end
+
   def print_end_game_message
     if (has_a_winner?)
-      puts "bleus has won!"
+      winner_type = winner.type
+
+      puts "#{winner_type} has won!"
     elsif (is_a_tie?)
       puts "It is a tie!"
     end
