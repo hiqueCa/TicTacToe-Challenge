@@ -1,5 +1,5 @@
-require_relative '../modules/input_validator'
-include InputValidator
+require_relative '../modules/validator'
+include Validator
 
 class Move  
   attr_reader :position, :valid, :valid_position
@@ -20,7 +20,7 @@ class Move
   def valid?
     validate?(
       values: position,
-      compared_to: InputValidator::VALID_POSITIONS,
+      compared_to: Validator::VALID_POSITIONS,
       by: :include?,
     ) && @board.valid_position?(@position)
   end

@@ -1,3 +1,6 @@
+require_relative '../modules/validator'
+include Validator
+
 class Board
   attr_accessor :state
   
@@ -17,7 +20,11 @@ class Board
   end
 
   def valid_position?(input_position)
-    state[input_position.to_i] != 'X' && state[input_position.to_i] != 'O'
+    !validate?(
+      values: state[input_position.to_i],
+      compared_to: Validator::VALID_MARKERS,
+      by: :include?,
+    )
   end
 
   def row_uniquelly_filled?
@@ -96,7 +103,13 @@ class Board
   end
 
   def is_fully_filled?
-    state.all? { |position| %w[X O].include?(position) }
+    state.all? do |position|
+      validate?(
+        values: position,
+        compared_to: Validator::VALID_MARKERS,
+        by: :include?,
+      )
+    end
   end
 
   def is_central_dominance_spot_available?
@@ -105,7 +118,7 @@ class Board
 
   def available_spots
     state.map do |position|
-      position if !%[X O].include?(position)
+      position if !validate?(values: position, compared_to: Validator::VALID_MARKERS, by: :include?)
     end.compact
   end
 end
