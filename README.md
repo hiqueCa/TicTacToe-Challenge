@@ -53,7 +53,7 @@ To deliver the best test coverage for the project while being able to properly m
 
 Overall, my code achieved a test coverage percentage of 83.27%:
 
-![code-coverage-img](https://github.com/hiqueCa/TicTacToe-Challenge/assets/59069972/4bf0593e-9f34-4d6b-a7c3-de32710983ad)
+![image](https://github.com/hiqueCa/TicTacToe-Challenge/assets/59069972/115d95c8-26eb-4073-bea9-a2c1035abfe6)
 
 ## How-tos :question:
 
