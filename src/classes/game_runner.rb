@@ -1,6 +1,4 @@
-require_relative 'game'
-require_relative '../modules/validator'
-require_relative '../modules/game_constants/game_runner'
+require_relative "../../requirements_helper"
 
 class GameRunner
   include Validator

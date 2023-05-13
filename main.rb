@@ -1,3 +1,3 @@
-require_relative './src/classes/game_runner'
+require_relative 'requirements_helper'
 
 GameRunner.new.start

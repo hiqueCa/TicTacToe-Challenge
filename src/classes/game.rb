@@ -1,7 +1,4 @@
-require_relative "./board"
-require_relative "./player_tree/human"
-require_relative "./player_tree/computer"
-require_relative "../modules/game_constants/game"
+require_relative "../../requirements_helper"
 
 class Game
 

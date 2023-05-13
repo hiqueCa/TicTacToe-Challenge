@@ -1,4 +1,4 @@
-require_relative '../modules/validator'
+require_relative "../../requirements_helper"
 
 class Board
   include Validator
