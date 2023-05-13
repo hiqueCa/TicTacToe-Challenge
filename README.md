@@ -78,7 +78,7 @@ To run the project using a Docker container, follow these steps:
 - At the root of your newly created project folder, run `docker build -t <your-prefered-name-for-the-new-docker-image> .` to build the proper docker image defined by this repo's `Dockerfile`;
 - After the image build is completed, run `docker run -it <your-prefered-name-for-the-new-docker-image> ruby main.rb` to run the game;
 - To execute the specs, run `docker run -it <your-prefered-name-for-the-new-docker-image> rspec spec`;
-- Unfortunately, the test coverage report is not working while running the tests suite inside the container. Nevertheless, it can still be fetched by following the local run steps above;
+- Unfortunately, the test coverage report is not being generated while running the tests suite inside the container. Nevertheless, tests work and the report can still be fetched by following the local run steps above;
 - If you want to kill the built docker container and image:
   - Run `docker ps -a` and get the container id of the previously built containers;
   - Run `docker rm <container-id>` using the container-id found in the previous step;
