@@ -2,7 +2,7 @@
 
 ## Motivation :bulb:
 
-This project was born as a main refactor over a rawly implemented tic-tac-toe game. The idea here was to explicitly test and explore over my Ruby programming and development habilities.
+This project was born as a main refactor over a rawly implemented tic-tac-toe game. The idea here was to explicitly test and explore over my Ruby programming and general development habilities.
 
 ## Achieved Goals :heavy_check_mark:
 
@@ -19,13 +19,24 @@ During the work proccess to refactor the code, my main goals were the following,
   - [x] Allowing the user to choose whether or not to play again based on desired input, removing the need to go through the boring step of running some verbose code on the terminal;
   - [x] Making it possible for the game to differ between ties and victories when dealing with end-games;
   - [x] Identification and proper output of the game winner if the game ends because of a victory;
-  - [x] Allowing the game to be run inside a Docker Container to standardize, centralize and ease the proccess of running the game without worrying about local incompatibilities;
-  - [x] Addition of a Github Action to run the tests switch on every main branch update detected, either by pull_requests or by straight pushes;
+  - [x] Allowing the game to be run inside a Docker Container to standardize, centralize and ease the process of running the game without worrying about local incompatibilities;
+  - [x] Addition of a Github Action to run the tests switch on every main branch update detected, either by pull requests or by straight pushes;
 
+## Refactoring thought process :brain:
 
-Along with the 
+To achieve the desired refactor result, my main thought process was to divide the abstract scope of a Tic Tac Toe game into several main entities: the `Game`, the `Board`, the `Player`(s), the `Move`(s) of each player and, finally, the user interacting interface of a `GameRunner`. Two things that helped a lot on defining the right entities to build were thinking about this game in a relational database kind of way along with some pinches of the [React thinking way](https://react.dev/learn/thinking-in-react):
 
-To achieve this, I divided the scope of a Tic Tac Toe game into several main entities: the game, the board, the players, and the moves of each player. The idea behind my refactoring was to extract responsibilities for each of the classes, in order to remove complexity from the single file that was provided by the challenge.
+- The user interacts initially with the `GameRunner`, as if the `GameRunner` was our user interface;
+- The `GameRunner` has one `Game` in a 1-1 relationship;
+- The `Game` has one `Board` in a 1-1 relationship;
+- The `Board` has many `Player`(s) in a 1-* relationship;
+- A `Player` can have many moves associated to it in a 1-* relationship;
+
+The idea behind this whole process was to take advantage of the main OOP paradigm strategies and code patterns to extract responsibilities for each of the classes in order to reduce complexity from the initial single `tictactoe.rb` file.
+
+After this initial separation process was done with, I could go forward with further developin the games functionalities with reduced worries over side-effects of code modifications an so on.
+
+## Test coverage :test_tube:
 
 In addition, I paid close attention to the test coverage given to the game's features. To do this, I used the rspec gem to implement the tests following the principles of TDD, and also used the simplecov gem, which provides a detailed report of the overall percentage coverage and each class in terms of tests. Overall, my code achieved a test coverage percentage of 84%.
 Technologies used
