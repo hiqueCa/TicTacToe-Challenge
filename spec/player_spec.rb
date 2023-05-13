@@ -4,7 +4,7 @@ describe Player do
   let(:marker) { 'X' }
   let(:name) { 'bleus' }
   let(:board) { Board.new }
-  let(:player) { Player.new(marker) }
+  let(:player) { Player.new(marker, name) }
 
   describe '#new' do
     it 'initializes the correct type of Player object with the correct instance variables' do

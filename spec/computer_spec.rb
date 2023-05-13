@@ -2,13 +2,15 @@ require_relative 'spec_helper'
 
 describe Computer do
   let(:marker) { 'O' }
-  let(:computer) { Computer.new(marker) }
+  let(:name) { 'bleus' }
+  let(:computer) { Computer.new(marker, name) }
 
   describe '#new' do
     it 'creates an instance of Computer with the correct attributes' do
       expect(computer).to be_an_instance_of(Computer)
       expect(computer.type).to eq('computer')
       expect(computer.marker).to eq(marker)
+      expect(computer.name).to eq(name)
       expect(computer.move_trials).to match_array([])
       expect(computer.last_valid_move).to be_nil
     end
