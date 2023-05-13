@@ -15,10 +15,6 @@ class Game
     @players = define_players
     @player_one = @players[0]
     @player_two = @players[1]
-    @markers_to_players_mapper = {
-      @player_one.marker.to_s => @player_one,
-      @player_two.marker.to_s => @player_two,
-    }
   end
 
   def start
@@ -40,9 +36,9 @@ class Game
   private
 
   def winner
-    return @markers_to_players_mapper[board.first_uniquelly_filled_column_marker] if board.column_uniquelly_filled?
-    return @markers_to_players_mapper[board.first_uniquelly_filled_row_marker] if board.row_uniquelly_filled?
-    return @markers_to_players_mapper[board.first_uniquelly_filled_diagonal_marker] if board.diagonal_uniquelly_filled?
+    return map_winning_marker_to_player(board.first_uniquelly_filled_column_marker) if board.column_uniquelly_filled?
+    return map_winning_marker_to_player(board.first_uniquelly_filled_row_marker) if board.row_uniquelly_filled?
+    return map_winning_marker_to_player(board.first_uniquelly_filled_diagonal_marker) if board.diagonal_uniquelly_filled?
   end
 
   def print_end_game_message
@@ -74,9 +70,9 @@ class Game
       @player_one.try_move(board, input_position)
     end
 
-    unless is_over?
-      @board.state[@player_one.last_valid_move.valid_position] = @player_one.marker
+    @board.state[@player_one.last_valid_move.valid_position] = @player_one.marker
 
+    unless is_over?
       @player_two.make_move(self, @player_one)
       @board.state[@player_two.last_valid_move.valid_position] = @player_two.marker
     end
@@ -144,5 +140,12 @@ class Game
     when "CPU_CPU"
       [Computer.new('X', 'Computer 1'), Computer.new('O', 'Computer 2')]
     end
+  end
+
+  def map_winning_marker_to_player(marker)
+    {
+      'X' => @player_one,
+      'O' => @player_two,
+    }[marker]
   end
 end
