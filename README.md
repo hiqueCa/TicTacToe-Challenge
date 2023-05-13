@@ -60,9 +60,12 @@ Overall, my code achieved a test coverage percentage of 83.27%:
 ### Locally with Ruby
 
 To locally run the project using ruby, follow these steps:
+
 - Make sure you have Ruby downloaded on your machine;
-- Clone this repo to your local filesys;
-- Go
+- Clone this repo to your local machine;
+- At the root of your newly created project, run `bundle install` to make sure you have all dependencies correctly installed; 
+- Also at the root of your newly created project folder, run `ruby main.rb` to play the game;
+- To execute the specs and get a hold of the coverage report, run `rspec spec`;
 
 Conclusion
 
