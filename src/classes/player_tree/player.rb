@@ -6,32 +6,25 @@ class Player
     'COMPUTER' => 'computer',
   }
 
-  AVAILABLE_PLAYER_MARKERS = {
-    'HUMAN' => 'O',
-    'COMPUTER' => 'X',
-  }
+  attr_reader :move_trials, :last_valid_move, :type, :marker
 
-  attr_reader :moves, :last_valid_move, :type, :marker
-
-  def initialize
+  def initialize(marker)
     @type = nil
-    @marker = nil
-    @moves = []
+    @marker = marker
+    @move_trials = []
     @last_valid_move = nil
   end
 
   def try_move(board, input_position)
-    desired_position_input = input_position
+    move_trial =  Move.new(input_position, board)
+    move_trials << move_trial
 
-    @moves << Move.new(desired_position_input)
-    last_move = @moves.last
-
-    if last_move.valid && board.valid_position?(last_move.valid_position)
-      @last_valid_move = last_move
+    if move_trial.valid
+      @last_valid_move = move_trial
     end
   end
 
   def last_move_was_valid?
-    !last_valid_move.nil? && last_valid_move == moves.last
+    !last_valid_move.nil? && last_valid_move == move_trials.last
   end
 end

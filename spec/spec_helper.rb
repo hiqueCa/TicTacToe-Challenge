@@ -7,6 +7,7 @@ require_relative '../src/classes/player_tree/computer'
 require_relative '../src/classes/move'
 require_relative '../src/classes/board'
 require_relative '../src/classes/game'
+require_relative '../src/modules/validator'
 
 RSpec.configure do |config|
   config.after(:suite) do

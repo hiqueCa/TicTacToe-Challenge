@@ -3,11 +3,12 @@ require_relative './spec_helper'
 describe Move do
   describe '#new' do
     before do
-      @move = Move.new(position)
+      @move = Move.new(position, board)
     end
 
     context 'when the user input position is valid' do
       let(:position) { '3' }
+      let(:board) { Board.new }
 
       it 'creates a new Move instance with the correct instance attributes' do
         expect(@move).to be_an_instance_of(Move)
@@ -19,6 +20,7 @@ describe Move do
 
     context 'when the user input position is invalid' do
       let(:position) { '/' }
+      let(:board) { Board.new }
 
       it 'creates a new Move instance with the correct instance attributes' do
         expect(@move).to be_an_instance_of(Move)

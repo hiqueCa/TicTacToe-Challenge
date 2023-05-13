@@ -2,9 +2,8 @@ require_relative 'player'
 
 class Human < Player
 
-  def initialize
-    super
-    @marker = Player::AVAILABLE_PLAYER_MARKERS['HUMAN']
+  def initialize(marker)
+    super(marker)
     @type = Player::AVAILABLE_PLAYER_TYPES['HUMAN']
   end
 end

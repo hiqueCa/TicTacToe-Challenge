@@ -1,8 +1,18 @@
+require_relative '../modules/validator'
+include Validator
+
 class Board
-  attr_accessor :state, :available_spots
+  attr_accessor :state
+  
+  attr_reader :first_uniquelly_filled_column_marker,
+              :first_uniquelly_filled_row_marker,
+              :first_uniquelly_filled_diagonal_marker
 
   def initialize
     @state = %w[0 1 2 3 4 5 6 7 8]
+    @first_uniquelly_filled_column_marker = nil
+    @first_uniquelly_filled_row_marker = nil
+    @first_uniquelly_filled_diagonal_marker = nil
   end
 
   def to_s
@@ -10,7 +20,11 @@ class Board
   end
 
   def valid_position?(input_position)
-    state[input_position.to_i] != 'X' && state[input_position.to_i] != 'O'
+    !validate?(
+      values: state[input_position.to_i],
+      compared_to: Validator::VALID_MARKERS,
+      by: :include?,
+    )
   end
 
   def row_uniquelly_filled?
@@ -23,7 +37,10 @@ class Board
         state[initial_row_index + 2],
       ]
 
-      if row.uniq.length == 1
+      row_uniq_markers = row.uniq
+
+      if row_uniq_markers.length == 1
+        @first_uniquelly_filled_row_marker = row_uniq_markers[0]
         return true
       else
         next
@@ -43,7 +60,10 @@ class Board
         state[initial_column_index + 6],
       ]
 
-      if column.uniq.length == 1
+      column_uniq_markers = column.uniq
+
+      if column_uniq_markers.length == 1
+        @first_uniquelly_filled_column_marker = column_uniq_markers[0]
         return true
       else
         next
@@ -68,7 +88,14 @@ class Board
       state[common_diagonals_index + 2],
     ]
 
-    if main_diagonal.uniq.length == 1 || secondary_diagonal.uniq.length == 1
+    main_diagonal_uniq_markers = main_diagonal.uniq
+    secondary_diagonal_uniq_markers = secondary_diagonal.uniq
+
+    if main_diagonal.uniq.length == 1
+      @first_uniquelly_filled_diagonal_marker = main_diagonal_uniq_markers[0]
+      return true
+    elsif secondary_diagonal.uniq.length == 1
+      @first_uniquelly_filled_diagonal_marker = secondary_diagonal_uniq_markers[0]
       return true
     end
 
@@ -76,7 +103,13 @@ class Board
   end
 
   def is_fully_filled?
-    state.all? { |position| %w[X O].include?(position) }
+    state.all? do |position|
+      validate?(
+        values: position,
+        compared_to: Validator::VALID_MARKERS,
+        by: :include?,
+      )
+    end
   end
 
   def is_central_dominance_spot_available?
@@ -85,7 +118,7 @@ class Board
 
   def available_spots
     state.map do |position|
-      position if !%[X O].include?(position)
+      position if !validate?(values: position, compared_to: Validator::VALID_MARKERS, by: :include?)
     end.compact
   end
 end
