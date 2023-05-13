@@ -74,4 +74,18 @@ describe Player do
       end
     end
   end
+
+  describe '.place_marker_on_last_valid_position' do
+    let(:input_position) { '1' }
+    subject { player.place_marker_on_last_valid_position(board) }
+
+    before do
+      player.try_move(board, input_position)
+    end
+
+    it "places the player's marker on the last_valid_position" do
+      subject
+      expect(board.state[player.last_valid_move.valid_position]).to eq(marker)
+    end
+  end
 end

@@ -69,11 +69,11 @@ class Game
 
       @player_one.try_move(board, input_position)
     end
-    @player_one.place_marker(board)
+    @player_one.place_marker_on_last_valid_position(board)
 
     unless is_over?
       @player_two.make_move(self, @player_one)
-      @player_two.place_marker(board)
+      @player_two.place_marker_on_last_valid_position(board)
     end
 
     puts board
@@ -91,7 +91,7 @@ class Game
 
       @player_one.try_move(board, player_one_input_position)
     end
-    @player_one.place_marker(board)
+    @player_one.place_marker_on_last_valid_position(board)
     puts board
 
     unless is_over?
@@ -106,7 +106,7 @@ class Game
 
         @player_two.try_move(board, player_two_input_position)
       end
-      @player_two.place_marker(board)
+      @player_two.place_marker_on_last_valid_position(board)
 
       puts board
     end
@@ -115,7 +115,7 @@ class Game
   def run_cpu_cpu_round
     puts "#{player_one}#{CPU_REQUIRE_MOVEMENT_MESSAGE}"
     @player_one.make_move(self, @player_two)
-    @player_one.place_marker(board)
+    @player_one.place_marker_on_last_valid_position(board)
 
     puts board
 
@@ -124,7 +124,7 @@ class Game
     unless is_over?
       puts "#{player_two}#{CPU_REQUIRE_MOVEMENT_MESSAGE}"
       @player_two.make_move(self, @player_one)
-      @player_two.place_marker(board)
+      @player_two.place_marker_on_last_valid_position(board)
       
       puts board
     end
