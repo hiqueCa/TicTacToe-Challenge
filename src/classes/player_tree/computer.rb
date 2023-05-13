@@ -24,7 +24,7 @@ class Computer < Player
   def define_best_available_move(game, next_player)
     board = game.board
     available_spots_for_current_try = board.available_spots
-    random_move_position = rand(0..available_spots_for_current_try.count)
+    random_move_position = pick_random_position_among(available_spots_for_current_try)
 
     best_move = available_spots_for_current_try[random_move_position]
 
@@ -39,5 +39,9 @@ class Computer < Player
     end
 
     best_move
+  end
+
+  def pick_random_position_among(available_positions)
+    rand(0...available_positions.count)
   end
 end
