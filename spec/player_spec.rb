@@ -76,7 +76,7 @@ describe Player do
   end
 
   describe '.place_marker_on_last_valid_position' do
-    let(:input_position) { '1' }
+    let(:input_position) { '2' }
     subject { player.place_marker_on_last_valid_position(board) }
 
     before do
