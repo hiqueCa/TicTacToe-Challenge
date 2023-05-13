@@ -6,7 +6,7 @@ This project was born as a main refactor over a rawly implemented tic-tac-toe ga
 
 ## Achieved Goals :heavy_check_mark:
 
-During the work proccess to refactor the code, my main responsibilities were the following, always remembering to keep the already existent features functional while expanding on the possiblites of the game:
+During the work proccess to refactor the code, my main goals were the following, always remembering to keep the already existent features functional while expanding on the possiblites of the game:
 
 - **Implemented MVPs:**
   - [x] Refactoring of the main code as to make it more extensible, reusable, readable and mantainable;
