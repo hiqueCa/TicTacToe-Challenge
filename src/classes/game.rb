@@ -69,12 +69,11 @@ class Game
 
       @player_one.try_move(board, input_position)
     end
-
-    @board.state[@player_one.last_valid_move.valid_position] = @player_one.marker
+    @player_one.place_marker(board)
 
     unless is_over?
       @player_two.make_move(self, @player_one)
-      @board.state[@player_two.last_valid_move.valid_position] = @player_two.marker
+      @player_two.place_marker(board)
     end
 
     puts board
@@ -92,8 +91,7 @@ class Game
 
       @player_one.try_move(board, player_one_input_position)
     end
-
-    @board.state[@player_one.last_valid_move.valid_position] = @player_one.marker
+    @player_one.place_marker(board)
     puts board
 
     unless is_over?
@@ -108,8 +106,8 @@ class Game
 
         @player_two.try_move(board, player_two_input_position)
       end
+      @player_two.place_marker(board)
 
-      @board.state[@player_two.last_valid_move.valid_position] = @player_two.marker
       puts board
     end
   end
@@ -117,7 +115,7 @@ class Game
   def run_cpu_cpu_round
     puts "#{player_one}#{CPU_REQUIRE_MOVEMENT_MESSAGE}"
     @player_one.make_move(self, @player_two)
-    @board.state[@player_one.last_valid_move.valid_position] = @player_one.marker
+    @player_one.place_marker(board)
 
     puts board
 
@@ -126,7 +124,8 @@ class Game
     unless is_over?
       puts "#{player_two}#{CPU_REQUIRE_MOVEMENT_MESSAGE}"
       @player_two.make_move(self, @player_one)
-      @board.state[@player_two.last_valid_move.valid_position] = @player_two.marker
+      @player_two.place_marker(board)
+      
       puts board
     end
   end

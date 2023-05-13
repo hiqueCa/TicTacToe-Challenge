@@ -32,4 +32,8 @@ class Player
   def to_s
     @name
   end
+
+  def place_marker(board)
+    board.state[last_valid_move.valid_position] = marker
+  end
 end
