@@ -24,7 +24,7 @@ During the work proccess to refactor the code, my main goals were the following,
 
 ## Refactoring thought process :brain:
 
-To achieve the desired refactor result, my main thought process was to divide the abstract scope of a Tic Tac Toe game into several main entities: the `Game`, the `Board`, the `Player`(s), the `Move`(s) of each player and, finally, the user interacting interface of a `GameRunner`. Two things that helped a lot on defining the right entities to build were thinking about this game in a relational database kind of way along with some pinches of the [React thinking way](https://react.dev/learn/thinking-in-react):
+To achieve the desired refactor result, my main thought process was to divide the abstract scope of a Tic Tac Toe game into several main entities: the `Game`, the `Board`, the `Player`(s), the `Move`(s) of each player and, finally, the user interacting interface of a `GameRunner`. Two things that helped a lot on defining the right entities to build were thinking about this game in a relational database kind of way along with some pinches of the [React thinking way](https://react.dev/learn/thinking-in-react) regardimg facing each new entity as a imaginary component with its own individual behaviours:
 
 - The user interacts initially with the `GameRunner`, as if the `GameRunner` was our user interface;
 - The `GameRunner` has one `Game` in a 1-1 relationship;
