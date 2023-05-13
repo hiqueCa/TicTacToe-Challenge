@@ -1,5 +1,5 @@
 module GameConstants
-  module Main
+  module GameRunner
     PLAY_AGAIN_INPUTS_PLAYING_MAPPER = {
       "Y" => true,
       "N" => false,
