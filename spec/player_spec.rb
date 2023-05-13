@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Player do
   let(:marker) { 'X' }
+  let(:name) { 'bleus' }
   let(:board) { Board.new }
   let(:player) { Player.new(marker) }
 
@@ -11,6 +12,7 @@ describe Player do
       expect(player.move_trials).to match_array([])
       expect(player.last_valid_move).to be_nil
       expect(player.marker).to eq(marker)
+      expect(player.name).to eq(name)
       expect(player.type).to be_nil
     end
   end

@@ -6,11 +6,12 @@ class Player
     'COMPUTER' => 'computer',
   }
 
-  attr_reader :move_trials, :last_valid_move, :type, :marker
+  attr_reader :move_trials, :last_valid_move, :type, :marker, :name
 
-  def initialize(marker)
+  def initialize(marker, name)
     @type = nil
     @marker = marker
+    @name = name
     @move_trials = []
     @last_valid_move = nil
   end
@@ -26,5 +27,9 @@ class Player
 
   def last_move_was_valid?
     !last_valid_move.nil? && last_valid_move == move_trials.last
+  end
+
+  def to_s
+    @name
   end
 end

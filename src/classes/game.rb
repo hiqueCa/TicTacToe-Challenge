@@ -1,7 +1,6 @@
 require_relative "./board"
 require_relative "./player_tree/human"
 require_relative "./player_tree/computer"
-require 'pry'
 
 class Game
 
@@ -45,9 +44,7 @@ class Game
 
   def print_end_game_message
     if (has_a_winner?)
-      winner_type = winner.type
-
-      puts "#{winner_type} has won!"
+      puts "#{winner} has won!"
     elsif (is_a_tie?)
       puts "It is a tie!"
     end
@@ -138,11 +135,11 @@ class Game
   def define_players
     case @game_type
     when "HUMAN_HUMAN"
-      [Human.new('X'), Human.new('O')]
+      [Human.new('X', 'Human 1'), Human.new('O', 'Human 2')]
     when "HUMAN_CPU"
-      [Human.new('X'), Computer.new('O')]
+      [Human.new('X', 'Human 1'), Computer.new('O', 'Computer 1')]
     when "CPU_CPU"
-      [Computer.new('X'), Computer.new('O')]
+      [Computer.new('X', 'Computer 1'), Computer.new('O', 'Computer 2')]
     end
   end
 end
