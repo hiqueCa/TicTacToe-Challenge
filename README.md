@@ -2,13 +2,28 @@
 
 ## Motivation :bulb:
 
-This project was born as a main refactor over a rawly implemented tic-tac-toe game. The idea here was to explicitly test and prove my Ruby programming and development habilities.
+This project was born as a main refactor over a rawly implemented tic-tac-toe game. The idea here was to explicitly test and explore over my Ruby programming and development habilities.
 
-## Defined Responsabilities (basic and extras):
+## Achieved Goals :heavy_check_mark:
 
 During the work proccess to refactor the code, my main responsibilities were the following, always remembering to keep the already existent features functional while expanding on the possiblites of the game:
 
-- asdf
+- **Implemented MVPs:**
+  - [x] Refactoring of the main code as to make it more extensible, reusable, readable and mantainable;
+  - [x] Test coverage of already existent and new functionalities of over 80% (~83%);
+  - [x] Implementation of a data and input validation layer as to guarantee proper game experience flow with no unexpected crashes or side-effects;
+  - [x] Proper entities separations between classes and modules;
+  - [x] Proper usage of the Ruby main API along with some of its gems;
+- **Implemented extras**:
+  - [x] Implementation of 3 types of games for the user to choose from (Human vs Human, Human vs Computer, Computer vs Computer) based on the user's desired input;
+  - [x] Allowing the user to choose whether or not to play again based on desired input, removing the need to go through the boring step of running some verbose code on the terminal;
+  - [x] Making it possible for the game to differ between ties and victories when dealing with end-games;
+  - [x] Identification and proper output of the game winner if the game ends because of a victory;
+  - [x] Allowing the game to be run inside a Docker Container to standardize, centralize and ease the proccess of running the game without worrying about local incompatibilities;
+  - [x] Addition of a Github Action to run the tests switch on every main branch update detected, either by pull_requests or by straight pushes;
+
+
+Along with the 
 
 To achieve this, I divided the scope of a Tic Tac Toe game into several main entities: the game, the board, the players, and the moves of each player. The idea behind my refactoring was to extract responsibilities for each of the classes, in order to remove complexity from the single file that was provided by the challenge.
 
