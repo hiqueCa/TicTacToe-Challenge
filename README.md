@@ -55,8 +55,15 @@ Overall, my code achieved a test coverage percentage of 83.27%:
 
 ![code-coverage-img]()
 
-
 ## How-tos :question:
+
+### Locally with Ruby
+
+To locally run the project using ruby, follow these steps:
+- Make sure you have Ruby downloaded on your machine;
+- Clone this repo to your local filesys;
+- Go
+
 Conclusion
 
 This project allowed me to improve my skills in refactoring, testing, and using design patterns to make code more maintainable and understandable. I hope this project serves as an example of how these practices can be used to improve existing codebases.
