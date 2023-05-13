@@ -1,7 +1,8 @@
 require_relative '../modules/validator'
-include Validator
 
 class Board
+  include Validator
+
   attr_accessor :state
   
   attr_reader :first_uniquelly_filled_column_marker,

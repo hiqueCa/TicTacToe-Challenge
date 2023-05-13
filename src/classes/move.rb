@@ -1,7 +1,9 @@
 require_relative '../modules/validator'
-include Validator
 
 class Move  
+  
+  include Validator
+
   attr_reader :position, :valid, :valid_position
 
   def initialize(position, board)
