@@ -4,6 +4,15 @@
 
 This project was born as a main refactor over a rawly implemented tic-tac-toe game. The idea here was to explicitly test and explore over my Ruby programming and general development habilities.
 
+## Main used technologies and ruby gems:technologist:
+
+- Ruby
+- [RSpec](https://rspec.info/)
+- [Simplecov](https://github.com/simplecov-ruby/simplecov)
+- [require_all](https://github.com/jarmo/require_all)
+- [Docker](https://www.docker.com/)
+- [GitHub Actions](https://github.com/features/actions)
+
 ## Achieved Goals :heavy_check_mark:
 
 During the work proccess to refactor the code, my main goals were the following, always remembering to keep the already existent features functional while expanding on the possiblites of the game:
@@ -37,6 +46,8 @@ The idea behind this whole process was to take advantage of the main OOP paradig
 After this initial separation process was done with, I could go forward with further developin the games functionalities with reduced worries over side-effects of code modifications an so on.
 
 ## Test coverage :test_tube:
+
+Mainly based on the usage of 
 
 In addition, I paid close attention to the test coverage given to the game's features. To do this, I used the rspec gem to implement the tests following the principles of TDD, and also used the simplecov gem, which provides a detailed report of the overall percentage coverage and each class in terms of tests. Overall, my code achieved a test coverage percentage of 84%.
 Technologies used
