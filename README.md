@@ -20,7 +20,7 @@ During the work proccess to refactor the code, my main goals were the following,
 - **Implemented MVPs:**
   - [x] Refactoring of the main code as to make it more extensible, reusable, readable and mantainable;
   - [x] Test coverage of already existent and new functionalities of over 80% (~83%);
-  - [x] Implementation of a data and input validation layer as to guarantee proper game experience flow with no unexpected crashes or side-effects;
+  - [x] Implementation of a data and input validation layer as to guarantee proper game experience flow with no unexpected crashes or side-effects (`Validator`);
   - [x] Proper entities separations between classes and modules;
   - [x] Proper usage of the Ruby main API along with some of its gems;
 - **Implemented extras**:
@@ -47,31 +47,16 @@ After this initial separation process was done with, I could go forward with fur
 
 ## Test coverage :test_tube:
 
-Mainly based on the usage of 
+Mainly based on the usage the principles of TDD and BDD, the tests were implemented with RSpec, a largely known and trusted Ruby gem used for test development.
 
-In addition, I paid close attention to the test coverage given to the game's features. To do this, I used the rspec gem to implement the tests following the principles of TDD, and also used the simplecov gem, which provides a detailed report of the overall percentage coverage and each class in terms of tests. Overall, my code achieved a test coverage percentage of 84%.
-Technologies used
+To deliver the best test coverage for the project while being able to properly measure the test coverage, I also used the simplecov gem, which provides a detailed report of the overall percentage coverage of the general code and of each entity (class or module).
 
-    Ruby
-    RSpec
-    Simplecov
+Overall, my code achieved a test coverage percentage of 83.27%:
 
-Refactoring Thought Process
+![code-coverage-img]()
 
-I started the refactoring process by analyzing the original code and identifying areas that needed improvement. I then divided the game into separate entities, each with its own responsibility, and created classes for each entity. This approach helped to simplify the code and make it more maintainable.
 
-I also implemented a system for validating user inputs using a Validator class that uses Ruby metaprogramming to abstract the validations present in the game.
-Extra features
-
-In addition to refactoring the original game, I added several extra features:
-
-    Implementation of 3 types of games for the user to choose from (Human vs Human, Human vs Computer, Computer vs Computer)
-    Allow the user to play again at the end of the game without having to rerun the initialization commands in the terminal
-    Distinguish between when a game ends in a tie or in a victory
-    Identify which player was the victorious one at the end of the game
-    Allow the game to be run inside a Docker container to make the project portable and centralized
-    Addition of a CI flow with the use of GitHub Actions so that the set of tests is run every time a change is detected in the main branch.
-
+## How-tos :question:
 Conclusion
 
 This project allowed me to improve my skills in refactoring, testing, and using design patterns to make code more maintainable and understandable. I hope this project serves as an example of how these practices can be used to improve existing codebases.
