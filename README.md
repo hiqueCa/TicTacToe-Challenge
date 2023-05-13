@@ -61,12 +61,31 @@ Overall, my code achieved a test coverage percentage of 83.27%:
 
 To locally run the project using ruby, follow these steps:
 
-- Make sure you have Ruby downloaded on your machine;
+- Make sure you have [Ruby installed](https://www.ruby-lang.org/en/downloads/) on your machine;
 - Clone this repo to your local machine;
-- At the root of your newly created project, run `bundle install` to make sure you have all dependencies correctly installed; 
+- At the root of your newly created project folder, run `bundle install` to make sure you have all dependencies correctly installed;
 - Also at the root of your newly created project folder, run `ruby main.rb` to play the game;
 - To execute the specs and get a hold of the coverage report, run `rspec spec`;
+- After executing the specs, the test coverage report gets available at the `/coverage/index.html` folder inside the project's root.
+  - Open this `index.html` file with your favorite web browser and check on the coverage results.
+
+### Virtually with a Docker machine container
+
+To run the project using a Docker container, follow these steps:
+
+- Make sure you have [Docker engine installed](https://docs.docker.com/engine/install/) on your machine;
+- Clone this repo to your local machine;
+- At the root of your newly created project folder, run `docker build -t <your-prefered-name-for-the-new-docker-image> .` to build the proper docker image defined by this repo's `Dockerfile`;
+- After the image build is completed, run `docker run -it <your-prefered-name-for-the-new-docker-image> ruby main.rb` to run the game;
+- To execute the specs, run `docker run -it <your-prefered-name-for-the-new-docker-image> rspec spec`;
+- Unfortunately, the test coverage report is not working while running the tests suite inside the container. Nevertheless, it can still be fetched by following the local run steps above;
+- If you want to kill the built docker container and image:
+  - Run `docker ps -a` and get the container id of the previously built containers;
+  - Run `docker rm <container-id>` using the container-id found in the previous step;
+  - Run `docker images` and find the image-id for the docker image previously built;
+  - Run `docker rmi <image-id>` to destroy the previously built image;
 
 Conclusion
 
-This project allowed me to improve my skills in refactoring, testing, and using design patterns to make code more maintainable and understandable. I hope this project serves as an example of how these practices can be used to improve existing codebases.
+This project allowed me to improve my skills in refactoring, testing, and using design patterns to make code more maintainable and understandable.
+Also, it allowed me to flex my development habilities while studying and discovering new themes and topics!
