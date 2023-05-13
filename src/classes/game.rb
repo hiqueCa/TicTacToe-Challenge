@@ -1,8 +1,11 @@
 require_relative "./board"
 require_relative "./player_tree/human"
 require_relative "./player_tree/computer"
+require_relative "../modules/game_constants/game"
 
 class Game
+
+  include GameConstants::Game
 
   attr_reader :board, :player_one, :player_two
 
@@ -44,9 +47,9 @@ class Game
 
   def print_end_game_message
     if (has_a_winner?)
-      puts "#{winner} has won!"
+      puts "#{winner}#{HAS_WON_MESSAGE}"
     elsif (is_a_tie?)
-      puts "It is a tie!"
+      puts TIE_MESSAGE
     end
   end
 
@@ -59,13 +62,13 @@ class Game
   end
 
   def run_human_cpu_round
-    puts "Enter a move position between 0 and 8:"
+    puts "#{player_one}#{REQUIRE_MOVEMENT_MESSAGE}"
     input_position = gets.chomp
 
     @player_one.try_move(board, input_position)
 
     until @player_one.last_move_was_valid?
-      puts "Please, enter a valid move position:"
+      puts RETRY_INPUT_MESSAGE
       input_position = gets.chomp
 
       @player_one.try_move(board, input_position)
@@ -82,13 +85,13 @@ class Game
   end
 
   def run_human_human_round
-    puts "Player 1, enter a move position between 0 and 8:"
+    puts "#{player_one}#{REQUIRE_MOVEMENT_MESSAGE}"
     player_one_input_position = gets.chomp
 
     @player_one.try_move(board, player_one_input_position)
 
     until @player_one.last_move_was_valid?
-      puts "Please, enter a valid move position:"
+      puts RETRY_INPUT_MESSAGE
       player_one_input_position = gets.chomp
 
       @player_one.try_move(board, player_one_input_position)
@@ -98,13 +101,13 @@ class Game
     puts board
 
     unless is_over?
-      puts "Player 2, enter a move position between 0 and 8:"
+      puts "#{player_two}#{REQUIRE_MOVEMENT_MESSAGE}"
       player_two_input_position = gets.chomp
 
       @player_two.try_move(board, player_two_input_position)
       
       until @player_two.last_move_was_valid?
-        puts "Please, enter a valid move position:"
+        puts RETRY_INPUT_MESSAGE
         player_two_input_position = gets.chomp
 
         @player_two.try_move(board, player_two_input_position)
@@ -116,7 +119,7 @@ class Game
   end
 
   def run_cpu_cpu_round
-    puts "Player 1, make a move!\n"
+    puts "#{player_one}#{CPU_REQUIRE_MOVEMENT_MESSAGE}"
     @player_one.make_move(self, @player_two)
     @board.state[@player_one.last_valid_move.valid_position] = @player_one.marker
 
@@ -125,7 +128,7 @@ class Game
     sleep(2)
 
     unless is_over?
-      puts "Player 2, make a move!\n"
+      puts "#{player_two}#{CPU_REQUIRE_MOVEMENT_MESSAGE}"
       @player_two.make_move(self, @player_one)
       @board.state[@player_two.last_valid_move.valid_position] = @player_two.marker
       puts board
