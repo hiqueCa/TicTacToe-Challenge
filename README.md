@@ -19,7 +19,7 @@ During the work proccess to refactor the code, my main goals were the following,
 
 - **Implemented MVPs:**
   - [x] Refactoring of the main code as to make it more extensible, reusable, readable and mantainable;
-  - [x] Test coverage of already existent and new functionalities of over 80% (~83%);
+  - [x] Test coverage of already existent and new functionalities of over 80% (~86%);
   - [x] Implementation of a data and input validation layer as to guarantee proper game experience flow with no unexpected crashes or side-effects (`Validator`);
   - [x] Proper entities separations between classes and modules;
   - [x] Proper usage of the Ruby main API along with some of its gems;
@@ -53,7 +53,7 @@ To deliver the best test coverage for the project while being able to properly m
 
 Overall, my code achieved a test coverage percentage of 86.01%:
 
-![image](https://github.com/hiqueCa/TicTacToe-Challenge/assets/59069972/00461b38-07da-40bb-9063-faf4c8ef70df)
+![image](https://github.com/hiqueCa/TicTacToe-Challenge/assets/59069972/a7a1271e-d3c7-4467-963c-c56c03b47c24)
 
 ## How-tos :question:
 
