@@ -51,9 +51,9 @@ Mainly based on the usage the principles of TDD and BDD, the tests were implemen
 
 To deliver the best test coverage for the project while being able to properly measure the test coverage, I also used the simplecov gem, which provides a detailed report of the overall percentage coverage of the general code and of each entity (class or module).
 
-Overall, my code achieved a test coverage percentage of 83.27%:
+Overall, my code achieved a test coverage percentage of 85.71%:
 
-![image](https://github.com/hiqueCa/TicTacToe-Challenge/assets/59069972/115d95c8-26eb-4073-bea9-a2c1035abfe6)
+![image](https://github.com/hiqueCa/TicTacToe-Challenge/assets/59069972/00461b38-07da-40bb-9063-faf4c8ef70df)
 
 ## How-tos :question:
 
