@@ -88,4 +88,12 @@ describe Player do
       expect(board.state[player.last_valid_move.valid_position]).to eq(marker)
     end
   end
+
+  describe '.to_s' do
+    subject { player.to_s }
+
+    it "prints the player's name as its stdout representation" do
+      expect(subject).to eq(player.name)
+    end
+  end
 end
